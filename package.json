@@ -1,0 +1,26 @@
+{
+	"name": "next-gen",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/main.js",
+	"bin": {
+		"next-gen": "bin/next-gen.js"
+	},
+	"scripts": {
+		"test": "tap"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"ansi-colors": "^4.1.1",
+		"esm": "^3.2.25",
+		"fs-extra": "^9.1.0",
+		"lodash.merge": "^4.6.2",
+		"prettier": "^2.2.1"
+	},
+	"devDependencies": {
+		"tap": "^14.11.0",
+		"test-console": "^1.1.0"
+	}
+}
