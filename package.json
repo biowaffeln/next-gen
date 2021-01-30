@@ -16,10 +16,13 @@
 		"ansi-colors": "^4.1.1",
 		"esm": "^3.2.25",
 		"fs-extra": "^9.1.0",
+		"jscodeshift": "^0.11.0",
+		"jscodeshift-add-imports": "^1.0.10",
 		"lodash.merge": "^4.6.2",
 		"prettier": "^2.2.1"
 	},
 	"devDependencies": {
+		"@types/tap": "^14.10.2",
 		"tap": "^14.11.0",
 		"test-console": "^1.1.0"
 	}

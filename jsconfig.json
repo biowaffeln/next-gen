@@ -1,9 +1,8 @@
 {
 	"compilerOptions": {
 		"typeRoots": ["./types"],
-		"baseUrl": "./",
 		"paths": {
-			"@/types": ["./types/next-gen.d.ts"]
+			"@/types/*": ["./types/*"]
 		}
 	}
 }
