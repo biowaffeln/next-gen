@@ -1,9 +1,12 @@
+// @ts-check
 import tap from "tap"
 import { readFile, writeFile } from "fs-extra"
 import { generatorTypeScript } from "../../src/generators/typescript"
-import { APP_JS, DOCUMENT_JS, DOCUMENT_JS_WITH_INITIAL_PROPS } from "../files"
+import { APP_JS, DOCUMENT_JS } from "../../src/helpers/source"
+import { DOCUMENT_JS_WITH_INITIAL_PROPS } from "../test-source"
 
 tap.beforeEach((done) => {
+	// @ts-ignore
 	const dir = tap.testdir({
 		"package.json": "{}",
 		pages: {
