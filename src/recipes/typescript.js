@@ -18,6 +18,26 @@ const dependencies = {
 	},
 }
 
+const TSCONFIG = {
+	compilerOptions: {
+		target: "es5",
+		lib: ["dom", "dom.iterable", "esnext"],
+		allowJs: true,
+		skipLibCheck: true,
+		strict: false,
+		forceConsistentCasingInFileNames: true,
+		noEmit: true,
+		esModuleInterop: true,
+		module: "esnext",
+		moduleResolution: "node",
+		resolveJsonModule: true,
+		isolatedModules: true,
+		jsx: "preserve",
+	},
+	include: ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	exclude: ["node_modules"],
+}
+
 const noop = () => {}
 
 /**
@@ -27,7 +47,9 @@ const noop = () => {}
  * - converts existing `_app.js` and `_document.js` files to typescript
  */
 export async function recipeTypeScript() {
-	await writeJSON("tsconfig.json", {}, { flag: "wx" }).catch(noop)
+	await writeJSON("tsconfig.json", TSCONFIG, { flag: "wx", spaces: 2 }).catch(
+		noop
+	)
 	await updatePackageJSON(dependencies)
 	// update _app.js file
 	if (await pathExists("pages/_app.js")) {
