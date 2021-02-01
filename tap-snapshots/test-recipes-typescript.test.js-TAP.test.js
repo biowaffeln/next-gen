@@ -67,7 +67,13 @@ export default MyDocument;
 `
 
 exports[`test/recipes/typescript.test.js TAP should create files > package 1`] = `
-{"devDependencies":{"@types/react":"^17.0.0","@types/node":"^14.14.22","typescript":"^4.1.3"}}
+{
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/node": "^14.14.22",
+    "typescript": "^4.1.3"
+  }
+}
 
 `
 

@@ -21,7 +21,7 @@ import { APP_JS, APP_TSX } from "./source"
 export async function updateJSON(file, object) {
 	const src = await readJSON(file)
 	merge(src, object)
-	await writeJSON(file, src)
+	await writeJSON(file, src, { spaces: 2 })
 }
 
 /**

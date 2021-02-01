@@ -36,7 +36,13 @@ module.exports = {
 `
 
 exports[`test/recipes/tailwind.test.js TAP should create files > must match snapshot 4`] = `
-{"devDependencies":{"autoprefixer":"^10.2.1","postcss":"^8.2.4","tailwindcss":"^2.0.2"}}
+{
+  "devDependencies": {
+    "autoprefixer": "^10.2.1",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^2.0.2"
+  }
+}
 
 `
 
