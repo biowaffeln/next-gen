@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/generators/sass.test.js TAP should create files > app 1`] = `
+exports[`test/recipes/sass.test.js TAP should create files > app 1`] = `
 import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }) {
@@ -16,12 +16,12 @@ export default MyApp;
 
 `
 
-exports[`test/generators/sass.test.js TAP should create files > package 1`] = `
+exports[`test/recipes/sass.test.js TAP should create files > package 1`] = `
 {"devDependencies":{"sass":"1.26.3"}}
 
 `
 
-exports[`test/generators/sass.test.js TAP should create files > styles 1`] = `
+exports[`test/recipes/sass.test.js TAP should create files > styles 1`] = `
 $color: hotpink;
 
 body {

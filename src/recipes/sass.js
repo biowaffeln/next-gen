@@ -25,7 +25,7 @@ body {
  * - installs dependencies
  * - creates a sample .scss file
  */
-export async function generatorSass() {
+export async function recipeSass() {
 	await updatePackageJSON(dependencies)
 	await outputFile("styles/index.scss", STYLES_SCSS)
 	await updateApp(addScssImport)

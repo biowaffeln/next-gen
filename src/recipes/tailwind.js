@@ -57,7 +57,7 @@ const STYLES = `@tailwind base;
  * - adds tailwind and postcss config files
  * - adds an import to
  */
-export async function generatorTailwind() {
+export async function recipeTailwind() {
 	await updatePackageJSON(dependencies)
 	if (await pathExists("tsconfig.json")) {
 		writeFile("tailwind.config.js", TS_TAILWIND_CONFIG)

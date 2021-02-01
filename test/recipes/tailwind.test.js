@@ -1,7 +1,7 @@
 // @ts-check
 import tap from "tap"
 import { createFile, outputFile, readFile, remove } from "fs-extra"
-import { generatorTailwind } from "../../src/generators/tailwind"
+import { recipeTailwind } from "../../src/recipes/tailwind"
 import { APP_JS, APP_TSX } from "../../src/helpers/source"
 
 tap.beforeEach((done) => {
@@ -17,7 +17,7 @@ tap.beforeEach((done) => {
 })
 
 tap.test("should create files", async (t) => {
-	await generatorTailwind()
+	await recipeTailwind()
 	t.matchSnapshot(await readFile("styles/tailwind.css", "utf-8"))
 	t.matchSnapshot(await readFile("tailwind.config.js", "utf-8"))
 	t.matchSnapshot(await readFile("postcss.config.js", "utf-8"))
@@ -30,7 +30,7 @@ tap.test("should create typescript files", async (t) => {
 	await createFile("tsconfig.json")
 	await remove("pages/_app.js")
 	await outputFile("pages/_app.tsx", APP_TSX)
-	await generatorTailwind()
+	await recipeTailwind()
 	t.matchSnapshot(await readFile("tailwind.config.js", "utf-8"))
 	t.matchSnapshot(await readFile("pages/_app.tsx", "utf-8"))
 	t.end()

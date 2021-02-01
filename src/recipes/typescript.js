@@ -26,7 +26,7 @@ const noop = () => {}
  * - adds a `tsconfig.json`
  * - converts existing `_app.js` and `_document.js` files to typescript
  */
-export async function generatorTypeScript() {
+export async function recipeTypeScript() {
 	await writeJSON("tsconfig.json", {}, { flag: "wx" }).catch(noop)
 	await updatePackageJSON(dependencies)
 	// update _app.js file
