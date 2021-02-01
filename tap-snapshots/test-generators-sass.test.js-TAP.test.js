@@ -6,7 +6,7 @@
  */
 'use strict'
 exports[`test/generators/sass.test.js TAP should create files > app 1`] = `
-import "../styles.scss";
+import "../styles/index.scss";
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

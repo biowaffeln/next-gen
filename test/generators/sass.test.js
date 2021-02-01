@@ -18,7 +18,7 @@ tap.beforeEach((done) => {
 
 tap.test("should create files", async (t) => {
 	await generatorSass()
-	t.matchSnapshot(await readFile("styles.scss", "utf-8"), "styles")
+	t.matchSnapshot(await readFile("styles/index.scss", "utf-8"), "styles")
 	t.matchSnapshot(await readFile("package.json", "utf-8"), "package")
 	t.matchSnapshot(await readFile("pages/_app.js", "utf-8"), "app")
 	t.end()

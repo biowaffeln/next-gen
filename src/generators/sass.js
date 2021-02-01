@@ -1,5 +1,5 @@
 // @ts-check
-import { writeFile } from "fs-extra"
+import { outputFile } from "fs-extra"
 import { withParser } from "jscodeshift"
 import { updateApp, updatePackageJSON } from "../helpers/fs"
 import { addImport } from "../helpers/jscodeshift"
@@ -27,7 +27,7 @@ body {
  */
 export async function generatorSass() {
 	await updatePackageJSON(dependencies)
-	await writeFile("styles.scss", STYLES_SCSS)
+	await outputFile("styles/index.scss", STYLES_SCSS)
 	await updateApp(addScssImport)
 }
 
@@ -39,6 +39,6 @@ const j = withParser("tsx")
  */
 function addScssImport(src) {
 	const root = j(src)
-	addImport(j, root, `import "../styles.scss";`)
+	addImport(j, root, `import "../styles/index.scss";`)
 	return root.toSource()
 }
