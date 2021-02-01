@@ -22,6 +22,8 @@ body {
 
 /**
  * Adds Sass support to a Next.js project.
+ * - installs dependencies
+ * - creates a sample .scss file
  */
 export async function generatorSass() {
 	await updatePackageJSON(dependencies)
@@ -32,7 +34,6 @@ export async function generatorSass() {
 const j = withParser("tsx")
 
 /**
- * Adds .scss file import to app.(js|tsx)
  * @param {string} src
  * @returns {string}
  */

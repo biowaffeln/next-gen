@@ -51,15 +51,16 @@ export async function updateFile(file, callback) {
 }
 
 /**
- * @callback updateWithLangCallback
+ * @callback updateNextCallback
  * @param {string} src The content of the updated file.
  * @param {"javascript" | "typescript"} language The language of the updated file.
+ * @returns {string} The updated content.
  */
 
 /**
  * Updates the content of a Next.js _app.(js|tsx) file.
  * Provides fallback content if no _app.(js|tsx) is found.
- * @param {updateWithLangCallback} callback
+ * @param {updateNextCallback} callback
  */
 export async function updateApp(callback) {
 	if (await pathExists("pages/_app.js")) {

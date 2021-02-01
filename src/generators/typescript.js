@@ -22,6 +22,9 @@ const noop = () => {}
 
 /**
  * Adds TypeScript to a Next.js project.
+ * - installs dependencies
+ * - adds a `tsconfig.json`
+ * - converts existing `_app.js` and `_document.js` files to typescript
  */
 export async function generatorTypeScript() {
 	await writeJSON("tsconfig.json", {}, { flag: "wx" }).catch(noop)
@@ -44,8 +47,7 @@ export async function generatorTypeScript() {
 
 const j = withParser("tsx")
 /**
- * Adds imports and types to an untyped
- * Next.js _app file.
+ * Adds imports and types to an untyped Next.js _app file.
  * @param {string} src
  * @returns {string} src with types added
  */
@@ -68,8 +70,7 @@ function addAppTypes(src) {
 }
 
 /**
- * Adds imports and types to an untyped
- * Next.js _document file.
+ * Adds imports and types to an untyped Next.js _document file.
  * @param {string} src
  * @returns {string} src with types added
  */
