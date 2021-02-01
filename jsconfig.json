@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"strict": true,
 		"typeRoots": ["./types"],
 		"paths": {
 			"@/types/*": ["./types/*"]
