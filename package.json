@@ -19,7 +19,9 @@
 		"jscodeshift": "^0.11.0",
 		"jscodeshift-add-imports": "^1.0.10",
 		"lodash.merge": "^4.6.2",
-		"prettier": "^2.2.1"
+		"prettier": "^2.2.1",
+		"prompts": "^2.4.0",
+		"yargs": "^16.2.0"
 	},
 	"devDependencies": {
 		"@types/tap": "^14.10.2",
