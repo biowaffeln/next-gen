@@ -39,6 +39,6 @@ const j = withParser("tsx")
  */
 function addScssImport(src) {
 	const root = j(src)
-	addImport(j, root, `import "../styles.scss"`)
+	addImport(j, root, `import "../styles.scss";`)
 	return root.toSource()
 }
