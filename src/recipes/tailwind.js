@@ -1,8 +1,8 @@
 // @ts-check
 import { outputFile, pathExists, writeFile } from "fs-extra"
 import { withParser } from "jscodeshift"
-import addImports from "jscodeshift-add-imports"
 import { updateApp, updatePackageJSON } from "../helpers/fs"
+import { addImport } from "../helpers/jscodeshift"
 
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
 
@@ -77,6 +77,6 @@ const j = withParser("tsx")
  */
 function addTailwindImport(src) {
 	const root = j(src)
-	addImports(root, j.template.statement`import "../styles/tailwind.css";`)
+	addImport(j, root, `import "../styles/tailwind.css";`)
 	return root.toSource()
 }

@@ -47,7 +47,9 @@ exports[`test/recipes/tailwind.test.js TAP should create files > must match snap
 `
 
 exports[`test/recipes/tailwind.test.js TAP should create files > must match snapshot 5`] = `
-import "../styles/tailwind.css";function MyApp({ Component, pageProps }) {
+import "../styles/tailwind.css";
+
+function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 
@@ -71,7 +73,6 @@ module.exports = {
 
 exports[`test/recipes/tailwind.test.js TAP should create typescript files > must match snapshot 2`] = `
 import { AppProps } from "next/app";
-
 import "../styles/tailwind.css";
 
 function MyApp({ Component, pagesProps }: AppProps) {
