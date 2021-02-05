@@ -1,8 +1,14 @@
 // @ts-check
 import tap from "tap";
-import { outputFile, readFile, readJSON, remove, writeFile } from "fs-extra";
-import { updateApp, updatePackageJSON } from "../../src/helpers/fs";
+import { outputFile, readFile, readJSON, remove, writeJSON } from "fs-extra";
+import {
+	updateApp,
+	updateDocument,
+	updatePackageJSON,
+} from "../../src/helpers/fs";
 import { stderr } from "test-console";
+import { APP_JS, APP_TSX, DOCUMENT_JS } from "../../src/helpers/source";
+import { DOCUMENT_TSX_WITH_INITIAL_PROPS } from "../test-source";
 
 tap.beforeEach((done) => {
 	// @ts-ignore
@@ -39,8 +45,8 @@ tap.test("updatePackageJSON", async (t) => {
 const updateCallback = (src, lang) => {
 	const stmt =
 		lang === "javascript"
-			? `import test from "test/js"`
-			: `import test from "test/ts"`;
+			? `import test from "test/js;"`
+			: `import test from "test/ts;"`;
 	return `${stmt}\n\n${src}`;
 };
 
@@ -53,26 +59,61 @@ tap.test("updateApp", (t) => {
 	});
 
 	t.test("fallback typescript", async (t) => {
-		await writeFile("tsconfig.json", "{}");
+		await writeJSON("tsconfig.json", {});
 		await updateApp(updateCallback);
 		const res = await readFile("pages/_app.tsx", "utf-8");
 		t.matchSnapshot(res, "updateApp typescript fallback");
 		t.end();
 	});
 
-	t.test("update app.js", async (t) => {
-		await outputFile("pages/_app.js", "const App = () => {};");
+	t.test("update _app.js", async (t) => {
+		await outputFile("pages/_app.js", APP_JS);
 		await updateApp(updateCallback);
 		const res = await readFile("pages/_app.js", "utf-8");
 		t.matchSnapshot(res, "updateApp js");
 		t.end();
 	});
 
-	t.test("update app.tsx", async (t) => {
-		await outputFile("pages/_app.tsx", "const App = () => {};");
+	t.test("update _app.tsx", async (t) => {
+		await outputFile("pages/_app.tsx", APP_TSX);
 		await updateApp(updateCallback);
 		const res = await readFile("pages/_app.tsx", "utf-8");
 		t.matchSnapshot(res, "updateApp tsx");
+		t.end();
+	});
+
+	t.end();
+});
+
+tap.test("updateDocument", (t) => {
+	t.test("fallback", async (t) => {
+		await updateDocument(updateCallback);
+		const res = await readFile("pages/_document.js", "utf-8");
+		t.matchSnapshot(res, "updateDocument fallback");
+		t.end();
+	});
+
+	t.test("fallback typescript", async (t) => {
+		await writeJSON("tsconfig.json", {});
+		await updateDocument(updateCallback);
+		const res = await readFile("pages/_document.tsx", "utf-8");
+		t.matchSnapshot(res, "updateDocument typescript fallback");
+		t.end();
+	});
+
+	t.test("update _document.js", async (t) => {
+		await outputFile("pages/_document.js", DOCUMENT_JS);
+		await updateDocument(updateCallback);
+		const res = await readFile("pages/_document.js", "utf-8");
+		t.matchSnapshot(res, "updateDocument js");
+		t.end();
+	});
+
+	t.test("update _document.tsx", async (t) => {
+		await outputFile("pages/_document.tsx", DOCUMENT_TSX_WITH_INITIAL_PROPS);
+		await updateDocument(updateCallback);
+		const res = await readFile("pages/_document.tsx", "utf-8");
+		t.matchSnapshot(res, "updateDocument tsx");
 		t.end();
 	});
 
