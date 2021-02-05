@@ -29,6 +29,12 @@ const depsMap = {
 		"babel-plugin-styled-components": "^1.8.0",
 		"@types/styled-components": "^5.1.7",
 	},
+	"chakra-ui": {
+		"@chakra-ui/react": "^1.1.5",
+		"@emotion/react": "^11.1.4",
+		"@emotion/styled": "^11.0.0",
+		"framer-motion": "^3.2.1",
+	},
 };
 
 function checkVersions() {
