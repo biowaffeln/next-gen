@@ -77,7 +77,7 @@ const j = withParser("tsx");
 function addAppTypes(src) {
 	const root = j(src);
 
-	addImport(j, root, `import type { AppProps } from "next/app"`);
+	addImport(j, root, `import type { AppProps } from "next/app";`);
 	root
 		.find(j.FunctionDeclaration)
 		.at(0)

@@ -32,7 +32,7 @@ export default MyDocument;
 `
 
 exports[`test/recipes/typescript.test.js TAP should create files > app 1`] = `
-import type { AppProps } from "next/app"
+import type { AppProps } from "next/app";
 
 function MyApp({
   Component,
