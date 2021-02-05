@@ -14,11 +14,11 @@
 	"license": "ISC",
 	"dependencies": {
 		"ansi-colors": "^4.1.1",
+		"deepmerge": "^4.2.2",
 		"esm": "^3.2.25",
 		"fs-extra": "^9.1.0",
 		"jscodeshift": "^0.11.0",
 		"jscodeshift-add-imports": "^1.0.10",
-		"lodash.merge": "^4.6.2",
 		"prompts": "^2.4.0",
 		"yargs": "^16.2.0"
 	},

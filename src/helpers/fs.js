@@ -7,7 +7,7 @@ import {
 	writeFile,
 	writeJSON,
 } from "fs-extra";
-import merge from "lodash.merge";
+import merge from "deepmerge";
 import ansi from "ansi-colors";
 import { APP_JS, APP_TSX } from "./source";
 
@@ -21,8 +21,8 @@ import { APP_JS, APP_TSX } from "./source";
  */
 export async function updateJSON(file, ...objects) {
 	const src = await readJSON(file);
-	merge(src, ...objects);
-	await writeJSON(file, src, { spaces: 2 });
+	const merged = merge.all([src, ...objects]);
+	await writeJSON(file, merged, { spaces: 2 });
 }
 
 /**

@@ -1,10 +1,10 @@
 dependencies:
   ansi-colors: 4.1.1
+  deepmerge: 4.2.2
   esm: 3.2.25
   fs-extra: 9.1.0
   jscodeshift: 0.11.0
   jscodeshift-add-imports: 1.0.10_jscodeshift@0.11.0
-  lodash.merge: 4.6.2
   prompts: 2.4.0
   yargs: 16.2.0
 devDependencies:
@@ -968,6 +968,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
+  /deepmerge/4.2.2:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
   /default-require-extensions/2.0.0:
     dependencies:
       strip-bom: 3.0.0
@@ -2056,10 +2062,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-+wMJF/hqMTTlvJvsDWngAT3f7bI=
-  /lodash.merge/4.6.2:
-    dev: false
-    resolution:
-      integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
   /lodash/4.17.20:
     resolution:
       integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -3709,13 +3711,13 @@ packages:
 specifiers:
   '@types/tap': ^14.10.2
   ansi-colors: ^4.1.1
+  deepmerge: ^4.2.2
   esm: ^3.2.25
   fs-extra: ^9.1.0
   husky: ^4.3.8
   jscodeshift: ^0.11.0
   jscodeshift-add-imports: ^1.0.10
   lint-staged: ^10.5.3
-  lodash.merge: ^4.6.2
   node-fetch: ^2.6.1
   prettier: ^2.2.1
   prompts: ^2.4.0
