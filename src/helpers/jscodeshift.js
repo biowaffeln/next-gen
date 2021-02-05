@@ -2,6 +2,12 @@
 import addImports from "jscodeshift-add-imports";
 
 /**
+ * @typedef {import("jscodeshift").JSCodeshift} JSCodeshift
+ * @typedef {import("jscodeshift").Collection} Collection
+ * @typedef {import("jscodeshift").ObjectProperty} ObjectProperty
+ */
+
+/**
  * Adds an import statement to a .js or .ts file.
  * Merges imports if they exist, otherwise it appends
  * the import after the existing ones.
@@ -9,8 +15,8 @@ import addImports from "jscodeshift-add-imports";
  * Similar to `jscodeshift-add-imports`, but fixes some
  * formatting issues regarding blank lines.
  *
- * @param {import("jscodeshift")} j
- * @param {import("jscodeshift").Collection} root
+ * @param {JSCodeshift} j
+ * @param {Collection} root
  * @param {string} statement
  */
 export function addImport(j, root, statement) {
@@ -52,8 +58,8 @@ ${statement}`,
  * Adds a require statement to a .js file.
  * Does not merge existing require calls.
  *
- * @param {import("jscodeshift")} j
- * @param {import("jscodeshift").Collection} root
+ * @param {JSCodeshift} j
+ * @param {Collection} root
  * @param {string} statement
  */
 export function addRequire(j, root, statement) {
@@ -78,4 +84,17 @@ export function addRequire(j, root, statement) {
 			])
 		);
 	}
+}
+
+/**
+ *
+ * @param {JSCodeshift} j
+ * @param {Collection} root
+ * @param  {ObjectProperty[]} objectProperties
+ */
+export function addWebpackOptions(j, root, ...objectProperties) {
+	root
+		.find(j.ObjectExpression)
+		.at(-1)
+		.forEach((p) => p.node.properties.push(...objectProperties));
 }
