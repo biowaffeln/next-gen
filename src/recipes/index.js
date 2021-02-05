@@ -3,6 +3,8 @@ import { recipeSass } from "./sass";
 import { recipeTypeScript } from "./typescript";
 import { recipeTailwind } from "./tailwind";
 import { recipePreact } from "./preact";
+import { recipeStyledComponents } from "./styled-components";
+import { recipeChakraUI } from "./chakra-ui";
 
 /** @typedef {{title: string, run: () => Promise<any>}} RecipeEntry */
 
@@ -23,5 +25,13 @@ export const recipeMap = {
 	preact: {
 		title: "Preact",
 		run: recipePreact,
+	},
+	"styled-components": {
+		title: "styled-components",
+		run: recipeStyledComponents,
+	},
+	"chakra-ui": {
+		title: "Chakra UI",
+		run: recipeChakraUI,
 	},
 };
