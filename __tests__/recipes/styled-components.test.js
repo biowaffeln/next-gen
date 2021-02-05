@@ -28,3 +28,15 @@ tap.test("should add styled-components to a ts project", async (t) => {
 	t.matchSnapshot(await readFile("pages/_document.tsx", "utf-8"));
 	t.end();
 });
+
+tap.test("should update .babelrc", async (t) => {
+	await writeJSON(".babelrc", {
+		presets: ["next/babel"],
+		plugins: ["existing-plugin"],
+	});
+	await recipeStyledComponents();
+	t.deepEqual(await readJSON(".babelrc"), {
+		presets: ["next/babel"],
+		plugins: ["existing-plugin", ["styled-components", { ssr: true }]],
+	});
+});
