@@ -24,6 +24,11 @@ const depsMap = {
 		postcss: "^8.2.4",
 		tailwindcss: "^2.0.2",
 	},
+	"styled-components": {
+		"styled-components": "^5.0.0",
+		"babel-plugin-styled-components": "^1.8.0",
+		"@types/styled-components": "^5.1.7",
+	},
 };
 
 function checkVersions() {
