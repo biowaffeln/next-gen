@@ -7,7 +7,11 @@
 'use strict'
 exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 1`] = `
 {
+  "name": "test-project",
   "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "next": "latest",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
@@ -79,15 +83,19 @@ export default MyDocument;
 
 exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 1`] = `
 {
+  "name": "test-project",
+  "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "next": "latest",
+    "styled-components": "^5.0.0"
+  },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/node": "^14.14.22",
     "typescript": "^4.1.3",
     "babel-plugin-styled-components": "^1.8.0",
     "@types/styled-components": "^5.1.7"
-  },
-  "dependencies": {
-    "styled-components": "^5.0.0"
   }
 }
 

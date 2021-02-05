@@ -14,12 +14,14 @@ module.exports = withPreact({});
 
 exports[`__tests__/recipes/preact.test.js TAP should update files > must match snapshot 1`] = `
 {
+  "name": "test-project",
   "dependencies": {
+    "react": "npm:@preact/compat@^0.0.4",
+    "react-dom": "npm:@preact/compat@^0.0.4",
+    "next": "latest",
     "@prefresh/next": "^1.3.0",
     "preact": "^10.5.5",
     "preact-render-to-string": "^5.1.11",
-    "react": "npm:@preact/compat@^0.0.4",
-    "react-dom": "npm:@preact/compat@^0.0.4",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.1.2"
   },
   "devDependencies": {

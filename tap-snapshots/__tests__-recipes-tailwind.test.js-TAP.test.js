@@ -37,6 +37,12 @@ module.exports = {
 
 exports[`__tests__/recipes/tailwind.test.js TAP should create files > must match snapshot 4`] = `
 {
+  "name": "test-project",
+  "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "next": "latest"
+  },
   "devDependencies": {
     "autoprefixer": "^10.2.1",
     "postcss": "^8.2.4",

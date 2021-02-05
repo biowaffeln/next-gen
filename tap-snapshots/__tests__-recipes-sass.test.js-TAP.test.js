@@ -18,6 +18,12 @@ export default MyApp;
 
 exports[`__tests__/recipes/sass.test.js TAP should create files > package 1`] = `
 {
+  "name": "test-project",
+  "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "next": "latest"
+  },
   "devDependencies": {
     "sass": "^1.32.6"
   }

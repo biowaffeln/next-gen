@@ -2,20 +2,12 @@
 import tap from "tap";
 import { createFile, pathExists, readFile, remove, writeFile } from "fs-extra";
 import { recipeTypeScript } from "../../src/recipes/typescript";
-import { APP_JS, DOCUMENT_JS } from "../../src/helpers/source";
 import { DOCUMENT_JS_WITH_INITIAL_PROPS } from "../test-source";
 import { stderr } from "test-console";
+import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
-	// @ts-ignore
-	const dir = tap.testdir({
-		"package.json": "{}",
-		pages: {
-			"_app.js": APP_JS,
-			"_document.js": DOCUMENT_JS,
-		},
-	});
-	process.chdir(dir);
+	setupDirectory();
 	done();
 });
 

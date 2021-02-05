@@ -2,17 +2,11 @@
 import tap from "tap";
 import { createFile, outputFile, readFile, remove } from "fs-extra";
 import { recipeTailwind } from "../../src/recipes/tailwind";
-import { APP_JS, APP_TSX } from "../../src/helpers/source";
+import { APP_TSX } from "../../src/helpers/source";
+import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
-	// @ts-ignore
-	const dir = tap.testdir({
-		"package.json": "{}",
-		pages: {
-			"_app.js": APP_JS,
-		},
-	});
-	process.chdir(dir);
+	setupDirectory();
 	done();
 });
 

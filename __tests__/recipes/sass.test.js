@@ -2,17 +2,10 @@
 import { readFile } from "fs-extra";
 import tap from "tap";
 import { recipeSass } from "../../src/recipes/sass";
-import { APP_JS } from "../../src/helpers/source";
+import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
-	// @ts-ignore
-	const dir = tap.testdir({
-		"package.json": "{}",
-		pages: {
-			"_app.js": APP_JS,
-		},
-	});
-	process.chdir(dir);
+	setupDirectory();
 	done();
 });
 

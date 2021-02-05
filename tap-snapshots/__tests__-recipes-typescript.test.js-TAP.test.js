@@ -68,6 +68,12 @@ export default MyDocument;
 
 exports[`__tests__/recipes/typescript.test.js TAP should create files > package 1`] = `
 {
+  "name": "test-project",
+  "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "next": "latest"
+  },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/node": "^14.14.22",

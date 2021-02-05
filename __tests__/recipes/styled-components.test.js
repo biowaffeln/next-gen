@@ -1,22 +1,13 @@
 // @ts-check
 import tap from "tap";
 import { recipeStyledComponents } from "../../src/recipes/styled-components";
-import { APP_JS, DOCUMENT_JS } from "../../src/helpers/source";
-import { readFile, writeFile } from "fs-extra";
+import { readFile, readJSON, writeFile, writeJSON } from "fs-extra";
 import { recipeTypeScript } from "../../src/recipes/typescript";
 import { DOCUMENT_TSX_WITH_INITIAL_PROPS } from "../test-source";
+import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
-	// @ts-ignore
-	const dir = tap.testdir({
-		"package.json": "{}",
-		"next.config.js": "module.exports = {};",
-		pages: {
-			"_app.js": APP_JS,
-			"_document.js": DOCUMENT_JS,
-		},
-	});
-	process.chdir(dir);
+	setupDirectory();
 	done();
 });
 

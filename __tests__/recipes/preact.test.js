@@ -2,18 +2,10 @@
 import { readFile, remove, writeFile } from "fs-extra";
 import tap from "tap";
 import { recipePreact } from "../../src/recipes/preact";
-import { APP_JS } from "../../src/helpers/source";
+import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
-	// @ts-ignore
-	const dir = tap.testdir({
-		"package.json": "{}",
-		"next.config.js": "module.exports = {};",
-		pages: {
-			"_app.js": APP_JS,
-		},
-	});
-	process.chdir(dir);
+	setupDirectory();
 	done();
 });
 
