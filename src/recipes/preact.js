@@ -3,6 +3,7 @@ import { pathExists, writeFile } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
 import { addRequire } from "../helpers/jscodeshift";
+import { NEXT_CONFIG } from "../helpers/source";
 
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
 
@@ -20,9 +21,6 @@ const dependencies = {
 		"next-plugin-preact": "^3.0.3",
 	},
 };
-
-const NEXT_CONFIG = `module.exports = {};
-`;
 
 /**
  * Adds Preact to a Next.js project.

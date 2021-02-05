@@ -44,3 +44,6 @@ export const BABELRC =
   "presets": ["next/babel"]
 }
 `
+
+export const NEXT_CONFIG = `module.exports = {};
+`;
