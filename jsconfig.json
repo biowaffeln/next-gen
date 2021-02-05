@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"strict": true,
+		"strictNullChecks": true,
 		"typeRoots": ["./types"],
 		"paths": {
 			"@/types/*": ["./types/*"]
