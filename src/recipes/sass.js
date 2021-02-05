@@ -9,7 +9,7 @@ import { addImport } from "../helpers/jscodeshift";
 /** @type {Dependencies} */
 const dependencies = {
 	devDependencies: {
-		sass: "1.26.3",
+		sass: "^1.32.6",
 	},
 };
 

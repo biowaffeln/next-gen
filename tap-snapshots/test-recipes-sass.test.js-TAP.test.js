@@ -19,7 +19,7 @@ export default MyApp;
 exports[`test/recipes/sass.test.js TAP should create files > package 1`] = `
 {
   "devDependencies": {
-    "sass": "1.26.3"
+    "sass": "^1.32.6"
   }
 }
 
