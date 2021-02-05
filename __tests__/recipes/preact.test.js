@@ -16,12 +16,6 @@ tap.test("should update files", async (t) => {
 	t.end();
 });
 
-tap.test("should create config if not exists", async (t) => {
-	await remove("next.config.js");
-	await recipePreact();
-	t.matchSnapshot(await readFile("next.config.js", "utf-8"));
-});
-
 tap.test("works with existing plugins", async (t) => {
 	await writeFile(
 		"next.config.js",

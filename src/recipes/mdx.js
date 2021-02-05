@@ -1,5 +1,5 @@
 // @ts-check
-import { pathExists, writeFile } from "fs-extra";
+import { pathExists } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
 import { addRequire, addWebpackOptions } from "../helpers/jscodeshift";
@@ -15,11 +15,10 @@ const dependencies = {};
  */
 export async function recipeMDX() {
 	await updatePackageJSON(dependencies);
-	if (!(await pathExists("next.config.js"))) {
-		await writeFile("next.config.js", NEXT_CONFIG);
-	}
 	const isTs = await pathExists("tsconfig.json");
-	await updateFile("next.config.js", (src) => addMDX(src, isTs));
+	await updateFile("next.config.js", (src) => addMDX(src, isTs), {
+		fallback: NEXT_CONFIG,
+	});
 }
 
 /**

@@ -1,5 +1,4 @@
 // @ts-check
-import { pathExists, writeFile } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
 import { addRequire } from "../helpers/jscodeshift";
@@ -27,10 +26,9 @@ const dependencies = {
  */
 export async function recipePreact() {
 	await updatePackageJSON(dependencies);
-	if (!(await pathExists("next.config.js"))) {
-		await writeFile("next.config.js", NEXT_CONFIG);
-	}
-	await updateFile("next.config.js", addPreact);
+	await updateFile("next.config.js", addPreact, {
+		fallback: NEXT_CONFIG,
+	});
 }
 
 /**

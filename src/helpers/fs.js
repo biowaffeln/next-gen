@@ -47,10 +47,19 @@ export function updatePackageJSON(...dependencies) {
  *
  * @param {string} file A path to the file to update.
  * @param {updateCallback} callback
+ * @param {{fallback?: string}} options
  */
-export async function updateFile(file, callback) {
-	const src = await readFile(file, "utf-8");
-	await writeFile(file, callback(src));
+export async function updateFile(file, callback, options = {}) {
+	try {
+		const src = await readFile(file, "utf-8");
+		await writeFile(file, callback(src));
+	} catch (e) {
+		if (options.fallback) {
+			await writeFile(file, callback(options.fallback));
+		} else {
+			throw e;
+		}
+	}
 }
 
 /**

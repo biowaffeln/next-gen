@@ -1,9 +1,17 @@
 // @ts-check
 import tap from "tap";
-import { outputFile, readFile, readJSON, remove, writeJSON } from "fs-extra";
+import {
+	outputFile,
+	readFile,
+	readJSON,
+	remove,
+	writeFile,
+	writeJSON,
+} from "fs-extra";
 import {
 	updateApp,
 	updateDocument,
+	updateFile,
 	updatePackageJSON,
 } from "../../src/helpers/fs";
 import { stderr } from "test-console";
@@ -38,6 +46,30 @@ tap.test("updatePackageJSON", async (t) => {
 		t.matchSnapshot(inspect.output, "package.json error log");
 		t.end();
 	});
+	t.end();
+});
+
+tap.test("updateFile", async (t) => {
+	t.test("should update file", async (t) => {
+		await writeFile("test.js", `console.log("hello")`);
+		await updateFile("test.js", (src) => `"use strict"\n` + src);
+		t.matchSnapshot(await readFile("test.js", "utf-8"));
+		t.end();
+	});
+
+	t.test("should use fallback", async (t) => {
+		await updateFile("madeup-file.js", (src) => `"use strict"\n` + src, {
+			fallback: `console.log("hello")`,
+		});
+		t.matchSnapshot(await readFile("madeup-file.js", "utf-8"));
+		t.end();
+	});
+
+	t.test("should error without fallback", (t) => {
+		t.rejects(updateFile("madeup-file.js", (src) => `"use strict"\n` + src));
+		t.end();
+	});
+
 	t.end();
 });
 
