@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/helpers/fs.test.js TAP updateApp fallback > updateApp fallback 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateApp fallback > updateApp fallback 1`] = `
 import test from "test/js;"
 
 function MyApp({ Component, pageProps }) {
@@ -16,7 +16,7 @@ export default MyApp;
 
 `
 
-exports[`test/helpers/fs.test.js TAP updateApp fallback typescript > updateApp typescript fallback 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateApp fallback typescript > updateApp typescript fallback 1`] = `
 import test from "test/ts;"
 
 import { AppProps } from "next/app";
@@ -28,7 +28,7 @@ function MyApp({ Component, pagesProps }: AppProps) {
 export default MyApp;
 `
 
-exports[`test/helpers/fs.test.js TAP updateApp update _app.js > updateApp js 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateApp update _app.js > updateApp js 1`] = `
 import test from "test/js;"
 
 function MyApp({ Component, pageProps }) {
@@ -39,7 +39,7 @@ export default MyApp;
 
 `
 
-exports[`test/helpers/fs.test.js TAP updateApp update _app.tsx > updateApp tsx 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateApp update _app.tsx > updateApp tsx 1`] = `
 import test from "test/ts;"
 
 import { AppProps } from "next/app";
@@ -51,7 +51,7 @@ function MyApp({ Component, pagesProps }: AppProps) {
 export default MyApp;
 `
 
-exports[`test/helpers/fs.test.js TAP updateDocument fallback > updateDocument fallback 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateDocument fallback > updateDocument fallback 1`] = `
 import test from "test/js;"
 
 function MyApp({ Component, pageProps }) {
@@ -62,7 +62,7 @@ export default MyApp;
 
 `
 
-exports[`test/helpers/fs.test.js TAP updateDocument fallback typescript > updateDocument typescript fallback 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateDocument fallback typescript > updateDocument typescript fallback 1`] = `
 import test from "test/ts;"
 
 import { AppProps } from "next/app";
@@ -74,7 +74,7 @@ function MyApp({ Component, pagesProps }: AppProps) {
 export default MyApp;
 `
 
-exports[`test/helpers/fs.test.js TAP updateDocument update _document.js > updateDocument js 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateDocument update _document.js > updateDocument js 1`] = `
 import test from "test/js;"
 
 import Document, { Html, Head, Main, NextScript } from "next/document";
@@ -97,7 +97,7 @@ export default MyDocument;
 
 `
 
-exports[`test/helpers/fs.test.js TAP updateDocument update _document.tsx > updateDocument tsx 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updateDocument update _document.tsx > updateDocument tsx 1`] = `
 import test from "test/ts;"
 
 import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
@@ -125,7 +125,7 @@ export default MyDocument;
 
 `
 
-exports[`test/helpers/fs.test.js TAP updatePackageJSON logs warning if there's no package.json > package.json error log 1`] = `
+exports[`__tests__/helpers/fs.test.js TAP updatePackageJSON logs warning if there's no package.json > package.json error log 1`] = `
 Array [
   "\\u001b[1m\\u001b[31mwarning - no package.json found\\u001b[39m\\u001b[22m\\n",
 ]

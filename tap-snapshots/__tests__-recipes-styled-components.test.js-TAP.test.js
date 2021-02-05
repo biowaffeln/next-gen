@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 1`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 1`] = `
 {
   "dependencies": {
     "styled-components": "^5.0.0"
@@ -17,7 +17,7 @@ exports[`test/recipes/styled-components.test.js TAP should add styled-components
 
 `
 
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 2`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 2`] = `
 import { ThemeProvider } from "styled-components";
 
  
@@ -35,7 +35,7 @@ export default MyApp;
 
 `
 
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 3`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a js project > must match snapshot 3`] = `
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
@@ -77,7 +77,7 @@ export default MyDocument;
 
 `
 
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 1`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 1`] = `
 {
   "devDependencies": {
     "@types/react": "^17.0.0",
@@ -93,7 +93,7 @@ exports[`test/recipes/styled-components.test.js TAP should add styled-components
 
 `
 
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 2`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 2`] = `
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
  
@@ -114,7 +114,7 @@ export default MyApp;
 
 `
 
-exports[`test/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 3`] = `
+exports[`__tests__/recipes/styled-components.test.js TAP should add styled-components to a ts project > must match snapshot 3`] = `
 import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 

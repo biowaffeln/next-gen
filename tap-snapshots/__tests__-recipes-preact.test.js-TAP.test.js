@@ -5,14 +5,14 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/recipes/preact.test.js TAP should create config if not exists > must match snapshot 1`] = `
+exports[`__tests__/recipes/preact.test.js TAP should create config if not exists > must match snapshot 1`] = `
 const withPreact = require("next-plugin-preact");
 
 module.exports = withPreact({});
 
 `
 
-exports[`test/recipes/preact.test.js TAP should update files > must match snapshot 1`] = `
+exports[`__tests__/recipes/preact.test.js TAP should update files > must match snapshot 1`] = `
 {
   "dependencies": {
     "@prefresh/next": "^1.3.0",
@@ -29,13 +29,13 @@ exports[`test/recipes/preact.test.js TAP should update files > must match snapsh
 
 `
 
-exports[`test/recipes/preact.test.js TAP should update files > must match snapshot 2`] = `
+exports[`__tests__/recipes/preact.test.js TAP should update files > must match snapshot 2`] = `
 const withPreact = require("next-plugin-preact");
 
 module.exports = withPreact({});
 `
 
-exports[`test/recipes/preact.test.js TAP works with existing plugins > must match snapshot 1`] = `
+exports[`__tests__/recipes/preact.test.js TAP works with existing plugins > must match snapshot 1`] = `
 const otherPlugin = require("plugin");
 const withPreact = require("next-plugin-preact");
 
