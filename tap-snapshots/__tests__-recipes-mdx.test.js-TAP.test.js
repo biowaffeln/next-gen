@@ -25,12 +25,10 @@ module.exports = withMDX({
 });
 `
 
-exports[`__tests__/recipes/mdx.test.js TAP should work with existing plugins > must match snapshot 1`] = `
-const withOtherPlugin = require("plugin");
+exports[`__tests__/recipes/mdx.test.js TAP should work with typescript > must match snapshot 1`] = `
 const withMDX = require("@next/mdx")();
 
-module.exports = withMDX(withOtherPlugin({
-  pageExtensions: ["js", "jsx", "mdx"]
-}));
-
+module.exports = withMDX({
+  pageExtensions: ["js", "tsx", "mdx"]
+});
 `
