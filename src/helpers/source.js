@@ -37,3 +37,10 @@ class MyDocument extends Document {
 
 export default MyDocument;
 `;
+
+// prettier-ignore
+export const BABELRC =
+`{
+  "presets": ["next/babel"]
+}
+`
