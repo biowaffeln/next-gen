@@ -14,22 +14,24 @@ import { APP_JS, APP_TSX } from "./source";
 /** @typedef {Object<string, any>} JSON */
 
 /**
- * Merges the contents of a JSON file with the provided object.
+ * Merges the contents of a JSON file with the provided objects.
+ *
  * @param {string} file
- * @param {JSON} object
+ * @param {JSON[]} objects
  */
-export async function updateJSON(file, object) {
+export async function updateJSON(file, ...objects) {
 	const src = await readJSON(file);
-	merge(src, object);
+	merge(src, ...objects);
 	await writeJSON(file, src, { spaces: 2 });
 }
 
 /**
- * Merges contents of package.json with the provided object.
- * @param {JSON} dependencies
+ * Merges contents of package.json with the provided objects.
+ *
+ * @param {JSON[]} dependencies
  */
-export function updatePackageJSON(dependencies) {
-	return updateJSON("package.json", dependencies).catch(() => {
+export function updatePackageJSON(...dependencies) {
+	return updateJSON("package.json", ...dependencies).catch(() => {
 		console.warn(ansi.bold.red("warning - no package.json found"));
 	});
 }
@@ -41,7 +43,8 @@ export function updatePackageJSON(dependencies) {
  */
 
 /**
- * Updates the content of a file. Takes a path to
+ * Updates the content of a file.
+ *
  * @param {string} file A path to the file to update.
  * @param {updateCallback} callback
  */
@@ -60,6 +63,7 @@ export async function updateFile(file, callback) {
 /**
  * Updates the content of a Next.js _app.(js|tsx) file.
  * Provides fallback content if no _app.(js|tsx) is found.
+ *
  * @param {updateNextCallback} callback
  */
 export async function updateApp(callback) {
@@ -73,5 +77,25 @@ export async function updateApp(callback) {
 		await outputFile("pages/_app.tsx", callback(APP_TSX, "typescript"));
 	} else {
 		await outputFile("pages/_app.js", callback(APP_JS, "javascript"));
+	}
+}
+
+/**
+ * Updates the content of a Next.js _document.(js|tsx) file.
+ * Provides fallback content if no _document.(js|tsx) is found.
+ *
+ * @param {updateNextCallback} callback
+ */
+export async function updateDocument(callback) {
+	if (await pathExists("pages/_document.js")) {
+		const src = await readFile("pages/_document.js", "utf-8");
+		await outputFile("pages/_document.js", callback(src, "javascript"));
+	} else if (await pathExists("pages/_document.tsx")) {
+		const src = await readFile("pages/_document.tsx", "utf-8");
+		await outputFile("pages/_document.tsx", callback(src, "typescript"));
+	} else if (await pathExists("tsconfig.json")) {
+		await outputFile("pages/_document.tsx", callback(APP_TSX, "typescript"));
+	} else {
+		await outputFile("pages/_document.js", callback(APP_JS, "javascript"));
 	}
 }
