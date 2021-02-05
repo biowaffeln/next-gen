@@ -1,8 +1,8 @@
 // @ts-check
-import { pathExists, writeFile } from "fs-extra"
-import { updateFile, updatePackageJSON } from "../helpers/fs"
-import j from "jscodeshift"
-import { addRequire } from "../helpers/jscodeshift"
+import { pathExists, writeFile } from "fs-extra";
+import { updateFile, updatePackageJSON } from "../helpers/fs";
+import j from "jscodeshift";
+import { addRequire } from "../helpers/jscodeshift";
 
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
 
@@ -19,20 +19,20 @@ const dependencies = {
 	devDependencies: {
 		"next-plugin-preact": "^3.0.3",
 	},
-}
+};
 
 const NEXT_CONFIG = `module.exports = {};
-`
+`;
 
 /**
  * Adds Preact to a Next.js project.
  */
 export async function recipePreact() {
-	await updatePackageJSON(dependencies)
+	await updatePackageJSON(dependencies);
 	if (!(await pathExists("next.config.js"))) {
-		await writeFile("next.config.js", NEXT_CONFIG)
+		await writeFile("next.config.js", NEXT_CONFIG);
 	}
-	await updateFile("next.config.js", addPreact)
+	await updateFile("next.config.js", addPreact);
 }
 
 /**
@@ -40,19 +40,19 @@ export async function recipePreact() {
  * @returns {string}
  */
 function addPreact(src) {
-	const root = j(src)
-	addRequire(j, root, `const withPreact = require("next-plugin-preact");`)
+	const root = j(src);
+	addRequire(j, root, `const withPreact = require("next-plugin-preact");`);
 
 	const expression = root.find(j.AssignmentExpression, {
 		left: {
 			object: { name: "module" },
 			property: { name: "exports" },
 		},
-	})
+	});
 
 	expression.forEach((p) => {
-		p.node.right = j.callExpression(j.identifier("withPreact"), [p.node.right])
-	})
+		p.node.right = j.callExpression(j.identifier("withPreact"), [p.node.right]);
+	});
 
-	return root.toSource()
+	return root.toSource();
 }

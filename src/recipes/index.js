@@ -1,8 +1,8 @@
 // @ts-check
-import { recipeSass } from "./sass"
-import { recipeTypeScript } from "./typescript"
-import { recipeTailwind } from "./tailwind"
-import { recipePreact } from "./preact"
+import { recipeSass } from "./sass";
+import { recipeTypeScript } from "./typescript";
+import { recipeTailwind } from "./tailwind";
+import { recipePreact } from "./preact";
 
 /** @typedef {{title: string, run: () => Promise<any>}} RecipeEntry */
 
@@ -24,4 +24,4 @@ export const recipeMap = {
 		title: "Preact",
 		run: recipePreact,
 	},
-}
+};

@@ -9,7 +9,7 @@ export const PACKAGE_JSON = JSON.stringify(
 	},
 	null,
 	2
-)
+);
 
 // prettier-ignore
 export const DOCUMENT_JS_WITH_INITIAL_PROPS =
