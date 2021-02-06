@@ -2,7 +2,11 @@
 import { pathExists } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
-import { addRequire, addWebpackOptions } from "../helpers/jscodeshift";
+import {
+	addRequire,
+	addConfigOptions,
+	wrapNextConfig,
+} from "../helpers/jscodeshift";
 import { NEXT_CONFIG } from "../helpers/source";
 
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
@@ -29,28 +33,15 @@ export async function recipeMDX() {
 function addMDX(src, isTs) {
 	const root = j(src);
 	addRequire(j, root, `const withMDX = require("@next/mdx")();`);
+	wrapNextConfig(j, root, j.identifier("withMDX"));
 
-	const moduleExport = root.find(j.AssignmentExpression, {
-		left: {
-			object: { name: "module" },
-			property: { name: "exports" },
-		},
-	});
-
-	moduleExport.forEach((p) => {
-		p.node.right = j.callExpression(j.identifier("withMDX"), [p.node.right]);
-	});
-
-	const { expression } = j.template;
-
-	const pageExtensions = isTs
-		? expression`["js", "tsx", "mdx"]`
-		: expression`["js", "jsx", "mdx"]`;
-
-	addWebpackOptions(
-		j,
-		root,
-		j.objectProperty(j.identifier("pageExtensions"), pageExtensions)
+	const options = j.objectProperty(
+		j.identifier("pageExtensions"),
+		isTs
+			? j.template.expression`["js", "tsx", "mdx"]`
+			: j.template.expression`["js", "jsx", "mdx"]`
 	);
+	addConfigOptions(j, root, options);
+
 	return root.toSource();
 }

@@ -5,6 +5,7 @@ import addImports from "jscodeshift-add-imports";
  * @typedef {import("jscodeshift").JSCodeshift} JSCodeshift
  * @typedef {import("jscodeshift").Collection} Collection
  * @typedef {import("jscodeshift").ObjectProperty} ObjectProperty
+ * @typedef {import("ast-types/gen/kinds").ExpressionKind} ExpressionKind
  */
 
 /**
@@ -90,11 +91,69 @@ export function addRequire(j, root, statement) {
  *
  * @param {JSCodeshift} j
  * @param {Collection} root
+ * @param {ExpressionKind} wrapper
+ */
+
+export function wrapNextConfig(j, root, wrapper) {
+	const moduleExport = root.find(j.AssignmentExpression, {
+		left: {
+			object: { name: "module" },
+			property: { name: "exports" },
+		},
+	});
+
+	if (moduleExport.length === 0) {
+		throw new Error("No module export was found.");
+	}
+
+	moduleExport.forEach((p) => {
+		p.node.right = j.callExpression(wrapper, [p.node.right]);
+	});
+}
+
+/**
+ *
+ * @param {JSCodeshift} j
+ * @param {Collection} root
  * @param  {ObjectProperty[]} objectProperties
  */
-export function addWebpackOptions(j, root, ...objectProperties) {
-	root
-		.find(j.ObjectExpression)
-		.at(-1)
-		.forEach((p) => p.node.properties.push(...objectProperties));
+export function addConfigOptions(j, root, ...objectProperties) {
+	const moduleExport = root.find(j.AssignmentExpression, {
+		left: {
+			object: { name: "module" },
+			property: { name: "exports" },
+		},
+	});
+
+	if (moduleExport.length === 0) {
+		throw new Error("Failed to add nextConfig properties.");
+	}
+
+	const right = moduleExport.get("right");
+
+	// simple case
+	if (right.node.type === "ObjectExpression") {
+		right.node.properties.push(...objectProperties);
+	}
+	// complex case
+	else if (right.node.type === "CallExpression") {
+		// find the innermost call expression
+		moduleExport
+			.find(j.CallExpression, (value) => {
+				return j(value).find(j.CallExpression).length === 0;
+			})
+			// add objectExpression or insert into existing one
+			.forEach((p) => {
+				if (
+					p.node.arguments[0] &&
+					p.node.arguments[0].type === "ObjectExpression"
+				) {
+					p.node.arguments[0].properties.push(...objectProperties);
+				} else {
+					p.node.arguments.push(j.objectExpression(objectProperties));
+				}
+			});
+	} else {
+		throw new Error("Failed to add nextConfig properties.");
+	}
 }

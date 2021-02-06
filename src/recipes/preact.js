@@ -1,7 +1,7 @@
 // @ts-check
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
-import { addRequire } from "../helpers/jscodeshift";
+import { addRequire, wrapNextConfig } from "../helpers/jscodeshift";
 import { NEXT_CONFIG } from "../helpers/source";
 
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
@@ -38,17 +38,6 @@ export async function recipePreact() {
 function addPreact(src) {
 	const root = j(src);
 	addRequire(j, root, `const withPreact = require("next-plugin-preact");`);
-
-	const expression = root.find(j.AssignmentExpression, {
-		left: {
-			object: { name: "module" },
-			property: { name: "exports" },
-		},
-	});
-
-	expression.forEach((p) => {
-		p.node.right = j.callExpression(j.identifier("withPreact"), [p.node.right]);
-	});
-
+	wrapNextConfig(j, root, j.identifier("withPreact"));
 	return root.toSource();
 }
