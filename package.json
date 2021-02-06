@@ -7,7 +7,8 @@
 		"next-gen": "bin/next-gen.js"
 	},
 	"scripts": {
-		"test": "tap"
+		"test": "tap",
+		"check-deps": "node -r esm scripts/check-deps.js"
 	},
 	"keywords": [],
 	"author": "",
