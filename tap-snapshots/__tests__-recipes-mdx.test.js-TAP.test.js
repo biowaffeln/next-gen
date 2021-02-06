@@ -11,7 +11,10 @@ exports[`__tests__/recipes/mdx.test.js TAP should update files > must match snap
   "dependencies": {
     "react": "17.0.0",
     "react-dom": "17.0.0",
-    "next": "latest"
+    "next": "latest",
+    "@mdx-js/react": "^1.6.18",
+    "@mdx-js/loader": "^1.5.1",
+    "@next/mdx": "^10.0.6"
   }
 }
 
