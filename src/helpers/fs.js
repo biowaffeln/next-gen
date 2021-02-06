@@ -50,14 +50,14 @@ export function updatePackageJSON(...dependencies) {
  * @param {{fallback?: string}} options
  */
 export async function updateFile(file, callback, options = {}) {
-	try {
+	if (await pathExists(file)) {
 		const src = await readFile(file, "utf-8");
 		await writeFile(file, callback(src));
-	} catch (e) {
+	} else {
 		if (options.fallback) {
-			await writeFile(file, callback(options.fallback));
+			await outputFile(file, callback(options.fallback));
 		} else {
-			throw e;
+			throw new Error("Path does not exist and no fallback was given.");
 		}
 	}
 }
