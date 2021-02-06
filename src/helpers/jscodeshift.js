@@ -137,6 +137,19 @@ export function addConfigOptions(j, root, ...objectProperties) {
 	}
 	// complex case
 	else if (right.node.type === "CallExpression") {
+		const composePlugin = root.find(j.VariableDeclarator, {
+			init: {
+				callee: { name: "require" },
+				arguments: { 0: { value: "next-compose-plugins" } },
+			},
+		});
+
+		// error if next config requires `next-compose-plugins`
+		// TODO: fix
+		if (composePlugin.length > 0) {
+			throw new Error("Faild to add nextConfig properties.");
+		}
+
 		// find the innermost call expression
 		moduleExport
 			.find(j.CallExpression, (value) => {

@@ -219,8 +219,16 @@ tap.test("addConfigOptions", (t) => {
 			j.identifier("key"),
 			j.stringLiteral("value")
 		);
+
+		const composePlugins =
+			// prettier-ignore
+			`const withPlugins = require("next-compose-plugins");
+
+module.exports = withPlugins([]);`;
+
 		t.throws(() => addConfigOptions(j, j(``), prop));
 		t.throws(() => addConfigOptions(j, j(`module.exports = ""`), prop));
+		t.throws(() => addConfigOptions(j, j(composePlugins), prop));
 		t.end();
 	});
 
