@@ -12,7 +12,13 @@ import { NEXT_CONFIG } from "../helpers/source";
 /** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
 
 /** @type {Dependencies} */
-const dependencies = {};
+const dependencies = {
+	dependencies: {
+		"@mdx-js/react": "^1.6.18",
+		"@mdx-js/loader": "^1.5.1",
+		"@next/mdx": "^10.0.6",
+	},
+};
 
 /**
  * Adds MDX support to a Next.js project.

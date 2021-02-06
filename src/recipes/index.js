@@ -5,6 +5,7 @@ import { recipeTailwind } from "./tailwind";
 import { recipePreact } from "./preact";
 import { recipeStyledComponents } from "./styled-components";
 import { recipeChakraUI } from "./chakra-ui";
+import { recipeMDX } from "./mdx";
 
 /** @typedef {{title: string, run: () => Promise<any>}} RecipeEntry */
 
@@ -33,5 +34,9 @@ export const recipeMap = {
 	"chakra-ui": {
 		title: "Chakra UI",
 		run: recipeChakraUI,
+	},
+	mdx: {
+		title: "MDX",
+		run: recipeMDX,
 	},
 };

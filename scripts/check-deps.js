@@ -35,6 +35,11 @@ const depsMap = {
 		"@emotion/styled": "^11.0.0",
 		"framer-motion": "^3.2.1",
 	},
+	mdx: {
+		"@mdx-js/loader": "^1.5.1",
+		"@mdx-js/react": "^1.6.18",
+		"@next/mdx": "^10.0.6",
+	},
 };
 
 function checkVersions() {
