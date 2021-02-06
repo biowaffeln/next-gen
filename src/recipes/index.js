@@ -7,7 +7,11 @@ import { recipeStyledComponents } from "./styled-components";
 import { recipeChakraUI } from "./chakra-ui";
 import { recipeMDX } from "./mdx";
 
-/** @typedef {{title: string, run: () => Promise<any>}} RecipeEntry */
+/**
+ * @typedef {object} RecipeEntry
+ * @property {string} title
+ * @property {() => Promise<any>} run
+ */
 
 /** @type {Record<string, RecipeEntry>} */
 export const recipeMap = {
