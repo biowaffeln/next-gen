@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import { createFile, pathExists, readFile, remove, writeFile } from "fs-extra";
 import { recipeTypeScript } from "../../src/recipes/typescript";

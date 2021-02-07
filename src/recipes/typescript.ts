@@ -1,16 +1,11 @@
-// @ts-check
 import { move, pathExists, writeJSON } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
-import { withParser } from "jscodeshift";
+import { Identifier, ObjectPattern, withParser } from "jscodeshift";
 import ansi from "ansi-colors";
 import { addImport } from "../helpers/jscodeshift";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-/** @typedef {import("jscodeshift").ObjectPattern} ObjectPattern */
-/** @typedef {import("jscodeshift").Identifier} Identifier */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	devDependencies: {
 		"@types/react": "^17.0.0",
 		"@types/node": "^14.14.22",
@@ -68,13 +63,11 @@ export async function recipeTypeScript() {
 }
 
 const j = withParser("tsx");
+
 /**
  * Adds imports and types to an untyped Next.js _app file.
- * @param {string} src
- * @returns {string} src with types added
  */
-
-function addAppTypes(src) {
+function addAppTypes(src: string): string {
 	const root = j(src);
 
 	addImport(j, root, `import type { AppProps } from "next/app";`);
@@ -82,7 +75,7 @@ function addAppTypes(src) {
 		.find(j.FunctionDeclaration)
 		.at(0)
 		.forEach((p) => {
-			const parameter = /** @type {ObjectPattern} */ (p.node.params[0]);
+			const parameter = <ObjectPattern>p.node.params[0];
 			parameter.typeAnnotation = j.typeAnnotation(
 				j.genericTypeAnnotation(j.identifier("AppProps"), null)
 			);
@@ -93,10 +86,8 @@ function addAppTypes(src) {
 
 /**
  * Adds imports and types to an untyped Next.js _document file.
- * @param {string} src
- * @returns {string} src with types added
  */
-function addDocumentTypes(src) {
+function addDocumentTypes(src: string): string {
 	const root = j(src);
 
 	const initialPropsMethod = root.find(j.ClassMethod, {
@@ -106,7 +97,7 @@ function addDocumentTypes(src) {
 	if (initialPropsMethod.length > 0) {
 		addImport(j, root, `import { DocumentContext } from "next/document";`);
 		initialPropsMethod.forEach((p) => {
-			const param = /** @type {Identifier} */ (p.node.params[0]);
+			const param = <Identifier>p.node.params[0];
 			param.typeAnnotation = j.typeAnnotation(
 				j.genericTypeAnnotation(j.identifier("DocumentContext"), null)
 			);

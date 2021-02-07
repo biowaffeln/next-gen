@@ -1,18 +1,23 @@
-// @ts-check
 import yargs from "yargs";
 import prompts from "prompts";
-import { recipeMap } from "./recipes";
+import { recipeMap, RecipeEntry } from "./recipes";
 import c from "ansi-colors";
 import { pathExists, readdir } from "fs-extra";
 import { makeChoice, pick, pipe, toKebab } from "./util";
 
-/** @typedef {import("./recipes").RecipeEntry} RecipeEntry */
-/** @typedef {string | undefined} UserInput */
+interface CmdResult {
+	recipe: string | undefined;
+}
 
 export function cli() {
 	yargs
 		.scriptName("next-gen")
-		.command("add [recipe]", "add a recipe to a Next.js project", () => {}, add)
+		.command<CmdResult>(
+			"add [recipe]",
+			"add a recipe to a Next.js project",
+			() => {},
+			add
+		)
 		.command("init", "create a new Next.js project", () => {}, init)
 		.demandCommand()
 		.recommendCommands()
@@ -20,15 +25,12 @@ export function cli() {
 		.help().argv;
 }
 
-/**
- * @param {{recipe: UserInput}} args
- */
-async function add({ recipe: recipeName }) {
+async function add({ recipe: recipeName }: CmdResult) {
 	const recipe = await getRecipeEntry(recipeName);
 
 	if (!recipe) {
 		console.log(`\nNo recipe called ${c.red.italic(
-			/** @type {string} */ (recipeName)
+			<string>recipeName
 		)} was found.
 Try \`next-gen add\` to search for recipes.\n`);
 	} else {
@@ -38,11 +40,9 @@ Try \`next-gen add\` to search for recipes.\n`);
 	}
 }
 
-/**
- * @param {UserInput} recipeName
- * @returns {Promise<RecipeEntry | undefined>}
- */
-async function getRecipeEntry(recipeName) {
+async function getRecipeEntry(
+	recipeName: string | undefined
+): Promise<RecipeEntry | undefined> {
 	if (!recipeName) {
 		const response = await prompts({
 			name: "recipeName",
@@ -133,7 +133,7 @@ async function init() {
 	const recipes = [
 		recipeMap[opts.language],
 		recipeMap[opts.styling],
-		...opts.plugins.map((plugin) => recipeMap[plugin]),
+		...opts.plugins.map((plugin: string) => recipeMap[plugin]),
 	].filter(Boolean);
 
 	console.log(recipes);

@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import {
 	outputFile,
@@ -73,8 +72,10 @@ tap.test("updateFile", async (t) => {
 	t.end();
 });
 
-/** @type {(src: string, lang: "javascript" | "typescript") => string} */
-const updateCallback = (src, lang) => {
+const updateCallback = (
+	src: string,
+	lang: "javascript" | "typescript"
+): string => {
 	const stmt =
 		lang === "javascript"
 			? `import test from "test/js;"`

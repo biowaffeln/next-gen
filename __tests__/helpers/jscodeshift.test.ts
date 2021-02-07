@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import {
 	addImport,
@@ -8,24 +7,19 @@ import {
 } from "../../src/helpers/jscodeshift";
 import { withParser } from "jscodeshift";
 
-/** @typedef {import("@/types/tap").Test} Test */
-/** @typedef {import("jscodeshift").ObjectProperty} ObjectProperty */
+type Test = typeof tap.Test.prototype;
 
-/**
- * A jscodeshift test case
- *
- * @typedef {Object} TestCase
- * @property {string} code
- * @property {string} statement
- * @property {string} expected
- */
+interface TestCase {
+	code: string;
+	statement: string;
+	expected: string;
+}
 
-/**
- * @param {string} name
- * @param {Test} t
- * @param {TestCase} testCase
- */
-const importTestCase = (name, t, { code, statement, expected }) => {
+const importTestCase = (
+	name: string,
+	t: Test,
+	{ code, statement, expected }: TestCase
+) => {
 	t.test(name, (t) => {
 		const j = withParser("tsx");
 		const root = j(code);
@@ -110,12 +104,11 @@ app()`,
 	t.end();
 });
 
-/**
- * @param {string} name
- * @param {Test} t
- * @param {TestCase} testCase
- */
-const requireTestCase = (name, t, { code, statement, expected }) => {
+const requireTestCase = (
+	name: string,
+	t: Test,
+	{ code, statement, expected }: TestCase
+) => {
 	t.test(name, (t) => {
 		const j = withParser("tsx");
 		const root = j(code);
@@ -162,12 +155,11 @@ module.exports = {}`,
 	t.end();
 });
 
-/**
- * @param {string} name
- * @param {Test} t
- * @param {{code: string, expected: string}} testCase
- */
-const addConfigTestCase = (name, t, { code, expected }) => {
+const addConfigTestCase = (
+	name: string,
+	t: Test,
+	{ code, expected }: { code: string; expected: string }
+) => {
 	t.test(name, (t) => {
 		const j = withParser("js");
 

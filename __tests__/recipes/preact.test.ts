@@ -1,5 +1,4 @@
-// @ts-check
-import { readFile, remove, writeFile } from "fs-extra";
+import { readFile, writeFile } from "fs-extra";
 import tap from "tap";
 import { recipePreact } from "../../src/recipes/preact";
 import setupDirectory from "../setup-dir";

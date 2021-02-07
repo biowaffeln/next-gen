@@ -1,4 +1,3 @@
-// @ts-check
 import { recipeSass } from "./sass";
 import { recipeTypeScript } from "./typescript";
 import { recipeTailwind } from "./tailwind";
@@ -7,14 +6,15 @@ import { recipeStyledComponents } from "./styled-components";
 import { recipeChakraUI } from "./chakra-ui";
 import { recipeMDX } from "./mdx";
 
-/**
- * @typedef {object} RecipeEntry
- * @property {string} title
- * @property {() => Promise<any>} run
- * @property {string=} description
- */
+export interface RecipeEntry {
+	title: string;
+	run: () => Promise<any>;
+	description?: string;
+}
 
-export const recipeMap = {
+export const validate = <T extends Record<string, RecipeEntry>>(a: T) => a;
+
+export const recipeMap = validate({
 	sass: {
 		title: "Sass",
 		run: recipeSass,
@@ -49,4 +49,4 @@ export const recipeMap = {
 		run: recipeMDX,
 		description: "JSX in Markdown Documents",
 	},
-};
+});

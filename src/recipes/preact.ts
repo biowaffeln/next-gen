@@ -1,13 +1,10 @@
-// @ts-check
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
-import { addRequire, wrapNextConfig } from "../helpers/jscodeshift";
+import { wrapNextConfig, addRequire } from "../helpers/jscodeshift";
 import { NEXT_CONFIG } from "../helpers/source";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	dependencies: {
 		"@prefresh/next": "^1.3.0",
 		preact: "^10.5.5",
@@ -31,11 +28,7 @@ export async function recipePreact() {
 	});
 }
 
-/**
- * @param {string} src
- * @returns {string}
- */
-function addPreact(src) {
+function addPreact(src: string): string {
 	const root = j(src);
 	addRequire(j, root, `const withPreact = require("next-plugin-preact");`);
 	wrapNextConfig(j, root, j.identifier("withPreact"));

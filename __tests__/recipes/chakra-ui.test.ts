@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import { recipeChakraUI } from "../../src/recipes/chakra-ui";
 import { readFile } from "fs-extra";

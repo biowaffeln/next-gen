@@ -1,13 +1,10 @@
-// @ts-check
 import { outputFile, pathExists, writeFile } from "fs-extra";
 import { withParser } from "jscodeshift";
 import { updateApp, updatePackageJSON } from "../helpers/fs";
 import { addImport } from "../helpers/jscodeshift";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	devDependencies: {
 		autoprefixer: "^10.2.1",
 		postcss: "^8.2.4",
@@ -71,11 +68,7 @@ export async function recipeTailwind() {
 
 const j = withParser("tsx");
 
-/**
- * @param {string} src
- * @returns {string}
- */
-function addTailwindImport(src) {
+function addTailwindImport(src: string): string {
 	const root = j(src);
 	addImport(j, root, `import "../styles/tailwind.css";`);
 	return root.toSource();

@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import { recipeStyledComponents } from "../../src/recipes/styled-components";
 import { readFile, readJSON, writeFile, writeJSON } from "fs-extra";

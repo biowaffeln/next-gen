@@ -1,12 +1,6 @@
-// @ts-check
+import type { Collection, JSCodeshift, ObjectProperty } from "jscodeshift";
+import type { ExpressionKind } from "ast-types/gen/kinds";
 import addImports from "jscodeshift-add-imports";
-
-/**
- * @typedef {import("jscodeshift").JSCodeshift} JSCodeshift
- * @typedef {import("jscodeshift").Collection} Collection
- * @typedef {import("jscodeshift").ObjectProperty} ObjectProperty
- * @typedef {import("ast-types/gen/kinds").ExpressionKind} ExpressionKind
- */
 
 /**
  * Adds an import statement to a .js or .ts file.
@@ -15,12 +9,8 @@ import addImports from "jscodeshift-add-imports";
  *
  * Similar to `jscodeshift-add-imports`, but fixes some
  * formatting issues regarding blank lines.
- *
- * @param {JSCodeshift} j
- * @param {Collection} root
- * @param {string} statement
  */
-export function addImport(j, root, statement) {
+export function addImport(j: JSCodeshift, root: Collection, statement: string) {
 	const s = j.template.statement([statement]);
 
 	const imports = root.find(j.ImportDeclaration);
@@ -58,12 +48,12 @@ ${statement}`,
 /**
  * Adds a require statement to a .js file.
  * Does not merge existing require calls.
- *
- * @param {JSCodeshift} j
- * @param {Collection} root
- * @param {string} statement
  */
-export function addRequire(j, root, statement) {
+export function addRequire(
+	j: JSCodeshift,
+	root: Collection,
+	statement: string
+) {
 	// find variable declarations that call require
 	const declarations = root.find(j.VariableDeclaration, {
 		declarations: {
@@ -87,14 +77,11 @@ export function addRequire(j, root, statement) {
 	}
 }
 
-/**
- *
- * @param {JSCodeshift} j
- * @param {Collection} root
- * @param {ExpressionKind} wrapper
- */
-
-export function wrapNextConfig(j, root, wrapper) {
+export function wrapNextConfig(
+	j: JSCodeshift,
+	root: Collection,
+	wrapper: ExpressionKind
+) {
 	const moduleExport = root.find(j.AssignmentExpression, {
 		left: {
 			object: { name: "module" },
@@ -111,13 +98,11 @@ export function wrapNextConfig(j, root, wrapper) {
 	});
 }
 
-/**
- *
- * @param {JSCodeshift} j
- * @param {Collection} root
- * @param  {ObjectProperty[]} objectProperties
- */
-export function addConfigOptions(j, root, ...objectProperties) {
+export function addConfigOptions(
+	j: JSCodeshift,
+	root: Collection,
+	...objectProperties: ObjectProperty[]
+) {
 	const moduleExport = root.find(j.AssignmentExpression, {
 		left: {
 			object: { name: "module" },

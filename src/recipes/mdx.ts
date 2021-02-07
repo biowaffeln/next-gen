@@ -1,18 +1,15 @@
-// @ts-check
 import { pathExists } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import j from "jscodeshift";
 import {
-	addRequire,
 	addConfigOptions,
 	wrapNextConfig,
+	addRequire,
 } from "../helpers/jscodeshift";
 import { NEXT_CONFIG } from "../helpers/source";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	dependencies: {
 		"@mdx-js/react": "^1.6.18",
 		"@mdx-js/loader": "^1.5.1",
@@ -31,12 +28,7 @@ export async function recipeMDX() {
 	});
 }
 
-/**
- * @param {string} src
- * @param {boolean} isTs
- * @returns {string}
- */
-function addMDX(src, isTs) {
+function addMDX(src: string, isTs: boolean): string {
 	const root = j(src);
 	addRequire(j, root, `const withMDX = require("@next/mdx")();`);
 	wrapNextConfig(j, root, j.identifier("withMDX"));

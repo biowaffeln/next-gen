@@ -1,5 +1,4 @@
-// @ts-check
-import { readFile, writeFile, writeJSON } from "fs-extra";
+import { readFile, writeJSON } from "fs-extra";
 import tap from "tap";
 import { recipeMDX } from "../../src/recipes/mdx";
 import setupDirectory from "../setup-dir";

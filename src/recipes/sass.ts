@@ -1,13 +1,10 @@
-// @ts-check
 import { outputFile } from "fs-extra";
 import { withParser } from "jscodeshift";
 import { updateApp, updatePackageJSON } from "../helpers/fs";
 import { addImport } from "../helpers/jscodeshift";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	devDependencies: {
 		sass: "^1.32.6",
 	},
@@ -33,11 +30,7 @@ export async function recipeSass() {
 
 const j = withParser("tsx");
 
-/**
- * @param {string} src
- * @returns {string}
- */
-function addScssImport(src) {
+function addScssImport(src: string): string {
 	const root = j(src);
 	addImport(j, root, `import "../styles/index.scss";`);
 	return root.toSource();

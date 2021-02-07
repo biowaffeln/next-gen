@@ -1,4 +1,3 @@
-// @ts-check
 import { pathExists, writeFile } from "fs-extra";
 import {
 	updateApp,
@@ -9,11 +8,9 @@ import {
 import { BABELRC } from "../helpers/source";
 import { withParser } from "jscodeshift";
 import { addImport } from "../helpers/jscodeshift";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	dependencies: {
 		"styled-components": "^5.0.0",
 	},
@@ -22,8 +19,7 @@ const dependencies = {
 	},
 };
 
-/** @type {Dependencies} */
-const dependenciesTs = {
+const dependenciesTs: Dependencies = {
 	devDependencies: {
 		"@types/styled-components": "^5.1.7",
 	},
@@ -52,11 +48,7 @@ export async function recipeStyledComponents() {
 
 const j = withParser("tsx");
 
-/**
- * @param {string} src
- * @param {"javascript" | "typescript"} language
- */
-function addStylesheet(src, language) {
+function addStylesheet(src: string, language: "javascript" | "typescript") {
 	const root = j(src);
 	addImport(j, root, `import { ServerStyleSheet } from "styled-components";`);
 	if (language == "typescript") {
@@ -124,10 +116,7 @@ const originalRenderPage = ctx.renderPage;`,
 	return root.toSource();
 }
 
-/**
- * @param {string} src
- */
-function addProvider(src) {
+function addProvider(src: string) {
 	const root = j(src);
 	addImport(j, root, `import { ThemeProvider } from "styled-components";`);
 	root.get("body");

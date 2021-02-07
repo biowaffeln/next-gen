@@ -1,4 +1,3 @@
-// @ts-check
 import tap from "tap";
 import { createFile, outputFile, readFile, remove } from "fs-extra";
 import { recipeTailwind } from "../../src/recipes/tailwind";

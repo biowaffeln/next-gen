@@ -1,4 +1,3 @@
-// @ts-check
 import { readFile } from "fs-extra";
 import tap from "tap";
 import { recipeSass } from "../../src/recipes/sass";

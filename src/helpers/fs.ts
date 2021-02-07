@@ -1,4 +1,3 @@
-// @ts-check
 import {
 	outputFile,
 	pathExists,
@@ -11,15 +10,12 @@ import merge from "deepmerge";
 import ansi from "ansi-colors";
 import { APP_JS, APP_TSX } from "./source";
 
-/** @typedef {Object<string, any>} JSON */
+type JSON = Record<string, any>;
 
 /**
  * Merges the contents of a JSON file with the provided objects.
- *
- * @param {string} file
- * @param {JSON[]} objects
  */
-export async function updateJSON(file, ...objects) {
+export async function updateJSON(file: string, ...objects: JSON[]) {
 	const src = await readJSON(file);
 	const merged = merge.all([src, ...objects]);
 	await writeJSON(file, merged, { spaces: 2 });
@@ -27,29 +23,23 @@ export async function updateJSON(file, ...objects) {
 
 /**
  * Merges contents of package.json with the provided objects.
- *
- * @param {JSON[]} dependencies
  */
-export function updatePackageJSON(...dependencies) {
+export function updatePackageJSON(...dependencies: JSON[]) {
 	return updateJSON("package.json", ...dependencies).catch(() => {
 		console.warn(ansi.bold.red("warning - no package.json found"));
 	});
 }
 
-/**
- * @callback updateCallback
- * @param {string} src The content of the updated file.
- * @returns {string} The updated content.
- */
+type updateCallback = (src: string) => string;
 
 /**
  * Updates the content of a file.
- *
- * @param {string} file A path to the file to update.
- * @param {updateCallback} callback
- * @param {{fallback?: string}} options
  */
-export async function updateFile(file, callback, options = {}) {
+export async function updateFile(
+	file: string,
+	callback: updateCallback,
+	options: { fallback?: string } = {}
+) {
 	if (await pathExists(file)) {
 		const src = await readFile(file, "utf-8");
 		await writeFile(file, callback(src));
@@ -62,20 +52,16 @@ export async function updateFile(file, callback, options = {}) {
 	}
 }
 
-/**
- * @callback updateNextCallback
- * @param {string} src The content of the updated file.
- * @param {"javascript" | "typescript"} language The language of the updated file.
- * @returns {string} The updated content.
- */
+type UpdateNextCallback = (
+	src: string,
+	language: "javascript" | "typescript"
+) => string;
 
 /**
  * Updates the content of a Next.js _app.(js|tsx) file.
  * Provides fallback content if no _app.(js|tsx) is found.
- *
- * @param {updateNextCallback} callback
  */
-export async function updateApp(callback) {
+export async function updateApp(callback: UpdateNextCallback) {
 	if (await pathExists("pages/_app.js")) {
 		const src = await readFile("pages/_app.js", "utf-8");
 		await outputFile("pages/_app.js", callback(src, "javascript"));
@@ -92,10 +78,8 @@ export async function updateApp(callback) {
 /**
  * Updates the content of a Next.js _document.(js|tsx) file.
  * Provides fallback content if no _document.(js|tsx) is found.
- *
- * @param {updateNextCallback} callback
  */
-export async function updateDocument(callback) {
+export async function updateDocument(callback: UpdateNextCallback) {
 	if (await pathExists("pages/_document.js")) {
 		const src = await readFile("pages/_document.js", "utf-8");
 		await outputFile("pages/_document.js", callback(src, "javascript"));

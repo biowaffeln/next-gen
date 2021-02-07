@@ -1,19 +1,9 @@
-// @ts-check
-import { pathExists, writeFile } from "fs-extra";
-import {
-	updateApp,
-	updateDocument,
-	updateJSON,
-	updatePackageJSON,
-} from "../helpers/fs";
-import { BABELRC } from "../helpers/source";
+import { updateApp, updatePackageJSON } from "../helpers/fs";
 import { withParser } from "jscodeshift";
 import { addImport } from "../helpers/jscodeshift";
+import { Dependencies } from "../types/next-gen";
 
-/** @typedef {import("@/types/next-gen").Dependencies} Dependencies */
-
-/** @type {Dependencies} */
-const dependencies = {
+const dependencies: Dependencies = {
 	dependencies: {
 		"@chakra-ui/react": "^1.1.5",
 		"@emotion/react": "^11.1.4",
@@ -35,11 +25,7 @@ export async function recipeChakraUI() {
 
 const j = withParser("tsx");
 
-/**
- * @param {string} src
- * @returns {string}
- */
-function addProvider(src) {
+function addProvider(src: string): string {
 	const root = j(src);
 	addImport(j, root, `import { ChakraProvider } from "@chakra-ui/react";`);
 	// wrap Component with ChakraProvider

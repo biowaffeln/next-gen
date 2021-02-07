@@ -1,3 +1,5 @@
 {
-	"test-regex": "test.js"
+	"no-ts": true,
+	"node-arg": "--require=ts-node/register/transpile-only",
+	"test-regex": "test.ts"
 }
