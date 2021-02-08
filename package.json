@@ -1,20 +1,35 @@
 {
-	"name": "next-gen",
-	"version": "1.0.0",
-	"description": "",
+	"name": "@biowaffeln/next-gen",
+	"version": "0.0.1",
+	"description": "The Next.js Codebase Generator",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/biowaffeln/next-gen.git"
+	},
+	"bugs": "https://github.com/biowaffeln/next-gen/issues",
 	"main": "src/main.js",
+	"files": [
+		"dist"
+	],
 	"bin": {
-		"next-gen": "dist/bin/next-gen.js"
+		"next-gen": "dist/bin/next-gen.js",
+		"@biowaffeln/next-gen": "dist/bin/next-gen.js"
 	},
 	"scripts": {
 		"build": "tsc",
 		"build:watch": "tsc -w",
 		"postbuild": "shx cp -rf template dist",
+		"prepublishOnly": "npm run build",
 		"test": "tap",
 		"check-deps": "node -r ts-node/register scripts/check-deps.ts"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"Next.js",
+		"jscodeshift",
+		"codegen",
+		"scaffolding"
+	],
+	"author": "Mark Kvetny @biowaffeln",
 	"license": "ISC",
 	"dependencies": {
 		"ansi-colors": "^4.1.1",
