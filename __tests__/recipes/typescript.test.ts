@@ -2,7 +2,6 @@ import tap from "tap";
 import { createFile, pathExists, readFile, remove, writeFile } from "fs-extra";
 import { recipeTypeScript } from "../../src/recipes/typescript";
 import { DOCUMENT_JS_WITH_INITIAL_PROPS } from "../test-source";
-import { stderr } from "test-console";
 import setupDirectory from "../setup-dir";
 
 tap.beforeEach((done) => {
@@ -26,13 +25,19 @@ tap.test("should add types to document", async (t) => {
 	t.end();
 });
 
-tap.test("should error", async (t) => {
-	const inspect = stderr.inspect();
-	await writeFile("pages/_document.js", "syntax error");
-	await writeFile("pages/_app.js", "syntax error");
-	await recipeTypeScript();
-	inspect.restore();
-	t.equals(inspect.output.length, 2);
+tap.test("should throw error", async (t) => {
+	t.test("with document", async (t) => {
+		await writeFile("pages/_document.js", "syntax error");
+		t.rejects(recipeTypeScript);
+		t.end();
+	});
+
+	t.test("with app", async (t) => {
+		await writeFile("pages/_app.js", "syntax error");
+		t.rejects(recipeTypeScript);
+		t.end();
+	});
+
 	t.end();
 });
 

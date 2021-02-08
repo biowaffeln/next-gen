@@ -1,7 +1,6 @@
 import { move, pathExists, writeJSON } from "fs-extra";
 import { updateFile, updatePackageJSON } from "../helpers/fs";
 import { Identifier, ObjectPattern, withParser } from "jscodeshift";
-import ansi from "ansi-colors";
 import { addImport } from "../helpers/jscodeshift";
 import { Dependencies } from "../types/next-gen";
 
@@ -50,14 +49,14 @@ export async function recipeTypeScript() {
 	if (await pathExists("pages/_app.js")) {
 		await move("pages/_app.js", "pages/_app.tsx");
 		await updateFile("pages/_app.tsx", addAppTypes).catch(() => {
-			console.warn(ansi.bold.red("failed to add types to _app.tsx"));
+			throw new Error("failed to add types to _app.tsx");
 		});
 	}
 	// update _document.js files
 	if (await pathExists("pages/_document.js")) {
 		await move("pages/_document.js", "pages/_document.tsx");
 		await updateFile("pages/_document.tsx", addDocumentTypes).catch(() => {
-			console.warn(ansi.bold.red("failed to add types to _document.tsx"));
+			throw new Error("failed to add types to _document.tsx");
 		});
 	}
 }

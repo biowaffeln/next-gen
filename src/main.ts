@@ -27,6 +27,11 @@ export function cli() {
 }
 
 async function add({ recipe: recipeName }: CmdResult) {
+	if (!(await pathExists("package.json"))) {
+		console.error(c.red("Error - no package.json was found."));
+		process.exit(1);
+	}
+
 	const recipe = await getRecipeEntry(recipeName);
 
 	if (!recipe) {
@@ -36,8 +41,12 @@ async function add({ recipe: recipeName }: CmdResult) {
 Try \`next-gen add\` to search for recipes.\n`);
 	} else {
 		console.log(`\nAdding ${recipe.title}...`);
-		await recipe.run();
-		console.log(`Recipe added ${c.green("✔")}\n`);
+		try {
+			await recipe.run();
+			console.log(`Recipe added ${c.green("✔")}\n`);
+		} catch (e) {
+			console.warn(`Error encountered:\n${c.red(e.message)}\n`);
+		}
 	}
 }
 
@@ -143,7 +152,11 @@ async function init() {
 
 	// apply thingys
 	for (const recipe of recipes) {
-		await recipe.run();
-		console.log(`Added ${recipe.title} ${c.green("✔")}`);
+		try {
+			await recipe.run();
+			console.log(`Added ${recipe.title} ${c.green("✔")}`);
+		} catch (e) {
+			console.warn(`Error at ${recipe.title}:\n${c.red(e.message)}`);
+		}
 	}
 }

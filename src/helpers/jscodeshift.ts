@@ -90,7 +90,9 @@ export function wrapNextConfig(
 	});
 
 	if (moduleExport.length === 0) {
-		throw new Error("No module export was found.");
+		throw new Error(
+			"Failed to update next.config.js: No module export was found"
+		);
 	}
 
 	moduleExport.forEach((p) => {
@@ -111,7 +113,7 @@ export function addConfigOptions(
 	});
 
 	if (moduleExport.length === 0) {
-		throw new Error("Failed to add nextConfig properties.");
+		throw new Error("Failed to update next.config.js");
 	}
 
 	const right = moduleExport.get("right");
@@ -132,7 +134,10 @@ export function addConfigOptions(
 		// error if next config requires `next-compose-plugins`
 		// TODO: fix
 		if (composePlugin.length > 0) {
-			throw new Error("Faild to add nextConfig properties.");
+			throw new Error(
+				`Failed to update next.config.js
+Recipe currently does not work with next-compose-plugins`
+			);
 		}
 
 		// find the innermost call expression
@@ -152,6 +157,6 @@ export function addConfigOptions(
 				}
 			});
 	} else {
-		throw new Error("Failed to add nextConfig properties.");
+		throw new Error("Failed to update next.config.js");
 	}
 }

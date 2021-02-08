@@ -7,7 +7,6 @@ import {
 	writeJSON,
 } from "fs-extra";
 import merge from "deepmerge";
-import ansi from "ansi-colors";
 import { APP_JS, APP_TSX } from "./source";
 
 type JSON = Record<string, any>;
@@ -25,9 +24,7 @@ export async function updateJSON(file: string, ...objects: JSON[]) {
  * Merges contents of package.json with the provided objects.
  */
 export function updatePackageJSON(...dependencies: JSON[]) {
-	return updateJSON("package.json", ...dependencies).catch(() => {
-		console.warn(ansi.bold.red("warning - no package.json found"));
-	});
+	return updateJSON("package.json", ...dependencies);
 }
 
 type updateCallback = (src: string) => string;

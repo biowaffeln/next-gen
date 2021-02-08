@@ -13,7 +13,6 @@ import {
 	updateFile,
 	updatePackageJSON,
 } from "../../src/helpers/fs";
-import { stderr } from "test-console";
 import { APP_JS, APP_TSX, DOCUMENT_JS } from "../../src/helpers/source";
 import { DOCUMENT_TSX_WITH_INITIAL_PROPS } from "../test-source";
 
@@ -37,12 +36,9 @@ tap.test("updatePackageJSON", async (t) => {
 		t.end();
 	});
 
-	t.test("logs warning if there's no package.json", async (t) => {
+	t.test("should throw if there's no package.json", async (t) => {
 		await remove("package.json");
-		const inspect = stderr.inspect();
-		await updatePackageJSON({ version: "1.0.0" });
-		inspect.restore();
-		t.matchSnapshot(inspect.output, "package.json error log");
+		t.rejects(() => updatePackageJSON({ version: "1.0.0" }));
 		t.end();
 	});
 	t.end();
