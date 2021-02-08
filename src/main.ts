@@ -5,6 +5,7 @@ import c from "ansi-colors";
 import { copy, ensureDir, pathExists, readdir } from "fs-extra";
 import { join } from "path";
 import { makeChoice, pick, pipe, toKebab } from "./util";
+import { updateFile, updatePackageJSON } from "./helpers/fs";
 
 interface CmdResult {
 	recipe: string | undefined;
@@ -85,7 +86,7 @@ async function init() {
 				name: "name",
 				type: "text",
 				message: "What should your project be called?\n",
-				initial: "My Next Project",
+				initial: "My App",
 			},
 			{
 				name: "directory",
@@ -150,7 +151,14 @@ async function init() {
 	await copy(join(__dirname, "../template"), opts.directory);
 	process.chdir(opts.directory);
 
-	// apply thingys
+	await updatePackageJSON({ name: toKebab(opts.name) });
+
+	await updateFile("README.md", (src) => {
+		return src.replace(/PROJECT_NAME/, opts.name);
+	});
+
+	console.log("");
+	// apply recipes
 	for (const recipe of recipes) {
 		try {
 			await recipe.run();
@@ -159,4 +167,15 @@ async function init() {
 			console.warn(`Error at ${recipe.title}:\n${c.red(e.message)}`);
 		}
 	}
+
+	console.log(`
+project was created successfully under:
+${c.blue(opts.directory)}
+
+install dependencies with:
+${c.blue(`<npm|yarn|pnpm> install`)}
+
+then start the development server with:
+${c.blue(`<npm|yarn|pnpm> run dev`)}
+`);
 }
