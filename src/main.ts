@@ -2,7 +2,8 @@ import yargs from "yargs";
 import prompts from "prompts";
 import { recipeMap, RecipeEntry } from "./recipes";
 import c from "ansi-colors";
-import { pathExists, readdir } from "fs-extra";
+import { copy, ensureDir, pathExists, readdir } from "fs-extra";
+import { join } from "path";
 import { makeChoice, pick, pipe, toKebab } from "./util";
 
 interface CmdResult {
@@ -130,11 +131,19 @@ async function init() {
 		}
 	);
 
-	const recipes = [
+	const recipes: RecipeEntry[] = [
 		recipeMap[opts.language],
 		recipeMap[opts.styling],
 		...opts.plugins.map((plugin: string) => recipeMap[plugin]),
 	].filter(Boolean);
 
-	console.log(recipes);
+	await ensureDir(opts.directory);
+	await copy(join(__dirname, "../template"), opts.directory);
+	process.chdir(opts.directory);
+
+	// apply thingys
+	for (const recipe of recipes) {
+		await recipe.run();
+		console.log(`Added ${recipe.title} ${c.green("✔")}`);
+	}
 }

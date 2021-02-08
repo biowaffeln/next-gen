@@ -8,6 +8,8 @@
 	},
 	"scripts": {
 		"build": "tsc",
+		"build:watch": "tsc -w",
+		"postbuild": "shx cp -rf template dist",
 		"test": "tap",
 		"check-deps": "node -r ts-node/register scripts/check-deps.ts"
 	},
@@ -36,6 +38,7 @@
 		"node-fetch": "^2.6.1",
 		"prettier": "^2.2.1",
 		"semver": "^7.3.4",
+		"shx": "^0.3.3",
 		"tap": "^14.11.0",
 		"test-console": "^1.1.0",
 		"ts-node": "^9.1.1",
