@@ -35,7 +35,7 @@ function addProvider(src: string): string {
 			j.jsxElement(
 				j.jsxOpeningElement(j.jsxIdentifier("ChakraProvider")),
 				j.jsxClosingElement(j.jsxIdentifier("ChakraProvider")),
-				[component.node]
+				[j.jsxText("\n"), component.node, j.jsxText("\n")]
 			)
 		);
 	return root.toSource();

@@ -145,7 +145,7 @@ function addProvider(src: string) {
 					),
 				]),
 				j.jsxClosingElement(j.jsxIdentifier("ThemeProvider")),
-				[component.node]
+				[j.jsxText("\n"), component.node, j.jsxText("\n")]
 			)
 		);
 	return root.toSource();
