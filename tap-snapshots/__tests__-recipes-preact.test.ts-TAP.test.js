@@ -11,7 +11,7 @@ exports[`__tests__/recipes/preact.test.ts TAP should update files > must match s
   "dependencies": {
     "react": "npm:@preact/compat@^0.0.4",
     "react-dom": "npm:@preact/compat@^0.0.4",
-    "next": "latest",
+    "next": "10.0.5",
     "@prefresh/next": "^1.3.0",
     "preact": "^10.5.5",
     "preact-render-to-string": "^5.1.11",
