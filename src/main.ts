@@ -4,8 +4,9 @@ import { recipeMap, RecipeEntry } from "./recipes";
 import c from "ansi-colors";
 import { copy, ensureDir, pathExists, readdir } from "fs-extra";
 import { join } from "path";
-import { makeChoice, pick, pipe, toKebab } from "./util";
+import { getPackageManager, makeChoice, pick, pipe, toKebab } from "./util";
 import { updateFile, updatePackageJSON } from "./helpers/fs";
+import { spawn } from "child_process";
 
 interface CmdResult {
 	recipe: string | undefined;
@@ -45,6 +46,13 @@ Try \`next-gen add\` to search for recipes.\n`);
 		try {
 			await recipe.run();
 			console.log(`Recipe added ${c.green("✔")}\n`);
+			const name = await getPackageManager();
+			console.log(`Installing dependencies with ${c.blue(name)}\n`);
+			spawn(name, ["install"], {
+				cwd: process.cwd(),
+				detached: true,
+				stdio: "inherit",
+			});
 		} catch (e) {
 			console.warn(`Error encountered:\n${c.red(e.message)}\n`);
 		}
