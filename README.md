@@ -35,7 +35,7 @@ Simply answer the questions in the interactive prompt and a Next.js project will
 
 ### `next-gen add [recipe]`
 
-This plugin adds support for various tools and frameworks to an existing Next.js project, all within seconds! To add a recipe, run `next-gen add [recipe]`.
+This command adds support for various tools and frameworks to an existing Next.js project, all within seconds! To add a recipe, run `next-gen add [recipe]`.
 
 > ⚠️ Warning! This command will modify files in your project. It's advised to commit your changes to git before running this command.
 
