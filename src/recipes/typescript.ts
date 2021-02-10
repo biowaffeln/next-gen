@@ -44,6 +44,7 @@ export async function recipeTypeScript() {
 	await writeJSON("tsconfig.json", TSCONFIG, { flag: "wx", spaces: 2 }).catch(
 		noop
 	);
+	await move("pages/index.js", "pages/index.tsx").catch(noop);
 	await updatePackageJSON(dependencies);
 	// update _app.js file
 	if (await pathExists("pages/_app.js")) {

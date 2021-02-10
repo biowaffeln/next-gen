@@ -66,6 +66,10 @@ export default MyDocument;
 
 `
 
+exports[`__tests__/recipes/typescript.test.ts TAP should create files > index 1`] = `
+export default () => <div>hello</div>
+`
+
 exports[`__tests__/recipes/typescript.test.ts TAP should create files > package 1`] = `
 {
   "name": "test-project",

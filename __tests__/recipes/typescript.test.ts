@@ -1,5 +1,12 @@
 import tap from "tap";
-import { createFile, pathExists, readFile, remove, writeFile } from "fs-extra";
+import {
+	createFile,
+	outputFile,
+	pathExists,
+	readFile,
+	remove,
+	writeFile,
+} from "fs-extra";
 import { recipeTypeScript } from "../../src/recipes/typescript";
 import { DOCUMENT_JS_WITH_INITIAL_PROPS } from "../test-source";
 import setupDirectory from "../setup-dir";
@@ -10,11 +17,13 @@ tap.beforeEach((done) => {
 });
 
 tap.test("should create files", async (t) => {
+	await outputFile("pages/index.js", "export default () => <div>hello</div>");
 	await recipeTypeScript();
 	t.matchSnapshot(await readFile("tsconfig.json", "utf-8"), "tsconfig");
 	t.matchSnapshot(await readFile("package.json", "utf-8"), "package");
 	t.matchSnapshot(await readFile("pages/_app.tsx", "utf-8"), "app");
 	t.matchSnapshot(await readFile("pages/_document.tsx", "utf-8"), "document");
+	t.matchSnapshot(await readFile("pages/index.tsx", "utf-8"), "index");
 	t.end();
 });
 
