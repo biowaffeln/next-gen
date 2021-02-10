@@ -31,11 +31,11 @@ next-gen comes with two commands, `next-gen init` for scaffolding new projects, 
 
 ### `next-gen init`
 
-Simply answer the questions in the interactive prompt and a Next.js project will be generated for you.
+Simply answer the questions in the interactive prompt and a Next.js project will be generated for you. The prompt will guide you through the process and allow you to add any of the below recipes to your newly created Next.js project.
 
 ### `next-gen add [recipe]`
 
-This command adds support for various tools and frameworks to an existing Next.js project, all within seconds! To add a recipe, run `next-gen add [recipe]`.
+This command adds various tools and frameworks to an existing Next.js project, all within seconds! To add a recipe, run `next-gen add [recipe]`.
 
 > ⚠️ Warning! This command will modify files in your project. It's advised to commit your changes to git before running this command.
 
