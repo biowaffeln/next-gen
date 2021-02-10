@@ -134,9 +134,3 @@ exports[`__tests__/helpers/fs.test.ts TAP updateFile should use fallback > must 
 "use strict"
 console.log("hello")
 `
-
-exports[`__tests__/helpers/fs.test.ts TAP updatePackageJSON logs warning if there's no package.json > package.json error log 1`] = `
-Array [
-  "\\u001b[1m\\u001b[31mwarning - no package.json found\\u001b[39m\\u001b[22m\\n",
-]
-`
