@@ -16,9 +16,10 @@
 		"@biowaffeln/next-gen": "dist/bin/next-gen.js"
 	},
 	"scripts": {
+		"prebuild": "shx rm -rf dist",
 		"build": "tsc",
-		"build:watch": "tsc -w",
 		"postbuild": "shx cp -rf template dist",
+		"dev": "tsc -w",
 		"prepublishOnly": "npm run build",
 		"test": "tap",
 		"check-deps": "node -r ts-node/register scripts/check-deps.ts"
