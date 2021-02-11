@@ -1,6 +1,6 @@
 {
 	"name": "@biowaffeln/next-gen",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "The Next.js Codebase Generator",
 	"repository": {
 		"type": "git",
