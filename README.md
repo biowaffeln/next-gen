@@ -33,6 +33,8 @@ next-gen comes with two commands, `next-gen init` for scaffolding new projects, 
 
 Simply answer the questions in the interactive prompt and a Next.js project will be generated for you. The prompt will guide you through the process and allow you to add any of the below recipes to your newly created Next.js project.
 
+[![terminal that runs the next-gen init command](https://asciinema.org/a/ee7d3Z7qPAuhWiWVTpUdPtGBe.svg)](https://asciinema.org/a/ee7d3Z7qPAuhWiWVTpUdPtGBe)
+
 ### `next-gen add [recipe]`
 
 This command adds various tools and frameworks to an existing Next.js project, all within seconds! To add a recipe, run `next-gen add [recipe]`.
