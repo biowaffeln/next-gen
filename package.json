@@ -1,0 +1,71 @@
+{
+	"name": "next-gen",
+	"description": "The Next.js Codebase Generator",
+	"version": "1.0.0",
+	"author": "Mark Kvetny @biowaffeln",
+	"bin": {
+		"next-gen": "./bin/run"
+	},
+	"bugs": "https://github.com/biowaffeln/next-gen/issues",
+	"devDependencies": {
+		"@oclif/dev-cli": "^1.26.0",
+		"@types/chai": "^4.2.22",
+		"@types/jscodeshift": "^0.11.2",
+		"@types/mocha": "^9.0.0",
+		"@types/mock-fs": "^4.13.1",
+		"@types/node": "^10.17.60",
+		"@types/prompts": "^2.0.14",
+		"@typescript-eslint/eslint-plugin": "^4.32.0",
+		"@typescript-eslint/parser": "^4.32.0",
+		"chai": "^4.3.4",
+		"eslint": "^7.32.0",
+		"globby": "^10.0.2",
+		"mocha": "^9.1.2",
+		"nyc": "^15.1.0",
+		"prettier": "^2.4.1",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.10"
+	},
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"files": [
+		"/bin",
+		"/lib",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
+	"homepage": "https://github.com/biowaffeln/next-gen",
+	"keywords": [
+		"oclif"
+	],
+	"license": "MIT",
+	"main": "lib/index.js",
+	"oclif": {
+		"commands": "./lib/commands",
+		"bin": "next-gen",
+		"plugins": [
+			"@oclif/plugin-help"
+		]
+	},
+	"repository": "biowaffeln/next-gen",
+	"scripts": {
+		"postpack": "rm -f oclif.manifest.json",
+		"posttest": "eslint . --ext .ts --config .eslintrc",
+		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+		"test": "mocha",
+		"test:watch": "mocha --watch --reporter min",
+		"version": "oclif-dev readme && git add README.md"
+	},
+	"types": "lib/index.d.ts",
+	"dependencies": {
+		"@oclif/command": "^1.8.0",
+		"@oclif/config": "^1.17.0",
+		"@oclif/plugin-help": "^3.2.2",
+		"fs-jetpack": "^4.2.0",
+		"jscodeshift": "^0.13.0",
+		"mock-fs": "^5.1.1",
+		"prompts": "^2.4.1",
+		"tslib": "^1.14.1"
+	}
+}
