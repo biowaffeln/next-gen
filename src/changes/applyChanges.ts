@@ -1,14 +1,14 @@
 import { readAsync, writeAsync, existsAsync } from 'fs-jetpack';
-import { Changes, NextGenFile } from './types';
+import { Changes, NextFile } from './types';
 import { getDependencies, Package } from './dependencies';
 import { evaluateSimpleTransforms } from './simpleTransform';
 import { evaluateASTTransforms } from './astTransform';
-import { resolveNextGenPaths } from './resolveNextGenPaths';
+import { Resolved, resolvePaths } from './resolveNextPaths';
 
 export async function applyChanges(changes: Changes) {
 	const isTs = (await existsAsync('tsconfig.json')) === 'file';
 	const hasSrcDir = (await existsAsync('src')) === 'dir';
-	const resolve = resolveNextGenPaths({ hasSrcDir });
+	const resolve = resolvePaths({ hasSrcDir });
 
 	const packageJSON = getDependencies(changes.addDependencies, {
 		installTypes: isTs,
@@ -29,7 +29,7 @@ export async function applyChanges(changes: Changes) {
 	writeFiles(astTransformedFiles);
 }
 
-const writeFiles = async (files: NextGenFile[]) => {
+const writeFiles = async (files: Resolved<NextFile>[]) => {
 	for (const file of files) {
 		await writeAsync(file.path, file.content);
 	}
