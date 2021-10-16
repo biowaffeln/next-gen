@@ -1,7 +1,7 @@
 import { Recipe } from '../recipe';
 import { addImport } from '../transforms/addImport';
-import { getAppPath } from '../pathHelpers/getPagePath';
-import { readTemplatePath } from '../pathHelpers/readTemplatePath';
+import { getAppPath } from '../../utils/getPagePath';
+import { readTemplatePath } from '../../utils/readTemplatePath';
 import * as j from 'jscodeshift';
 
 const getTemplate = readTemplatePath(__dirname);

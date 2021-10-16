@@ -1,0 +1,7 @@
+import type { NextPage } from "next";
+
+const Index: NextPage = () => {
+  return <div>Welcome from next-gen!</div>;
+};
+
+export default Index;

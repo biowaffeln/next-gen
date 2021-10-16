@@ -1,0 +1,5 @@
+const Index = () => {
+  return <div>Welcome from next-gen!</div>;
+};
+
+export default Index;

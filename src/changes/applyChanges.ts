@@ -1,9 +1,11 @@
-import { readAsync, writeAsync, existsAsync } from 'fs-jetpack';
-import { Changes, NextFile } from './types';
-import { getDependencies, Package } from './dependencies';
+import { existsAsync } from 'fs-jetpack';
+import { Changes } from './types';
+import { getDependencies } from './dependencies';
 import { evaluateSimpleTransforms } from './simpleTransform';
 import { evaluateASTTransforms } from './astTransform';
-import { Resolved, resolvePaths } from './resolveNextPaths';
+import { resolvePaths } from './resolveNextPaths';
+import { writeResolvedNextFiles } from '../utils/writeNextFiles';
+import { updatePackageJSON } from '../utils/updatePackageJSON';
 
 export async function applyChanges(changes: Changes) {
 	const isTs = (await existsAsync('tsconfig.json')) === 'file';
@@ -13,40 +15,18 @@ export async function applyChanges(changes: Changes) {
 	const packageJSON = getDependencies(changes.addDependencies, {
 		installTypes: isTs,
 	});
-	writePackageJSON(packageJSON);
+	updatePackageJSON(packageJSON);
 
 	const newFiles = resolve(changes.createFiles);
-	writeFiles(newFiles);
+	writeResolvedNextFiles(newFiles);
 
 	const transformedFiles = await Promise.all(
 		evaluateSimpleTransforms(resolve(changes.simpleTransforms))
 	);
-	writeFiles(transformedFiles);
+	writeResolvedNextFiles(transformedFiles);
 
 	const astTransformedFiles = await Promise.all(
 		evaluateASTTransforms(resolve(changes.ASTTransforms))
 	);
-	writeFiles(astTransformedFiles);
+	writeResolvedNextFiles(astTransformedFiles);
 }
-
-const writeFiles = async (files: Resolved<NextFile>[]) => {
-	for (const file of files) {
-		await writeAsync(file.path, file.content);
-	}
-};
-
-const writePackageJSON = async (obj: Package) => {
-	const pkg = await readAsync('package.json', 'json');
-
-	if (!pkg) {
-		throw new Error('Error: no package.json was found');
-	}
-	if (obj.dependencies) {
-		pkg.dependencies = { ...pkg.dependencies, ...obj.dependencies };
-	}
-	if (obj.devDependencies) {
-		pkg.devDependencies = { ...pkg.devDependencies, ...obj.devDependencies };
-	}
-
-	await writeAsync('package.json', pkg);
-};

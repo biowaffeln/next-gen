@@ -3,26 +3,19 @@ import { existsAsync, listAsync } from 'fs-jetpack';
 
 const kebabCase = (input: string) => input.replace(/\s+/g, '-').toLowerCase();
 
-interface PromptResult {
-	name: string;
-	directory: string;
-	styling: string;
-}
-
-/**
- * Styling libs:
- *  - sass
- *  - tailwindcss
- *  - styled-components
- *  - stitches
- */
-
 const isNonEmptyDir = async (path: string) => {
 	return (
 		(await existsAsync(path)) === 'dir' &&
 		((await listAsync(path)) ?? []).length > 0
 	);
 };
+
+interface PromptResult {
+	name: string;
+	directory: string;
+	styling: string;
+	isTs: boolean;
+}
 
 export const initPrompt = async (): Promise<PromptResult> =>
 	await prompts([
@@ -43,6 +36,14 @@ export const initPrompt = async (): Promise<PromptResult> =>
 					return true;
 				}
 			},
+		},
+		{
+			name: 'isTs',
+			type: 'toggle',
+			message: 'Do you want to use Typescript?',
+			initial: false,
+			active: 'yes',
+			inactive: 'no',
 		},
 		{
 			name: 'styling',
