@@ -1,11 +1,12 @@
 import { expect } from 'chai';
-import { resolveNextGenPaths } from '../../src/changes/resolveNextGenPaths';
+import { resolvePaths } from '../../src/changes/resolveNextPaths';
 
 describe('resolvePaths', () => {
 	it('should resolve without hasSrcDir', () => {
 		const file = { path: 'test.config.js', content: 'test' };
+		const result = resolvePaths({ hasSrcDir: false })([file]);
 
-		expect(resolveNextGenPaths({ hasSrcDir: false })([file])).to.eql([
+		expect(result).to.eql([
 			{
 				path: 'test.config.js',
 				content: 'test',
@@ -22,7 +23,7 @@ describe('resolvePaths', () => {
 		const transform = (src: unknown) => src;
 		const cssTransform = { path: 'styles/index.css', transform };
 
-		const result = resolveNextGenPaths({ hasSrcDir: true })([
+		const result = resolvePaths({ hasSrcDir: true })([
 			testConfig,
 			cssTransform,
 		]);
