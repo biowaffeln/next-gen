@@ -32,7 +32,7 @@ export const tailwind: Recipe = async () => ({
 		{
 			path: getAppPath(),
 			transform: (root) =>
-				addImport(root, j.template.statement`import "../styles/global.css"`),
+				addImport(root, j.template.statement`import "../styles/global.css;"`),
 			fallback: '',
 			parser: 'tsx',
 		},
