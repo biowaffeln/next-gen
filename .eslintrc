@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/style",
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // Enforce the consistent use of either backticks, double, or single quotes
+    "quotes": ["warn", "single"],
+    // Enforce the consistent use of either function declarations or expressions
+    "func-style": ["warn", "expression", { "allowArrowFunctions": true }],
+    // Enforces return statements in callbacks of array's methods
+    "array-callback-return": ["warn", { "checkForEach": true }],
+    // Disallow await inside of loops, should use Promise.all()
+    "no-await-in-loop": "warn",
+    // Allow non-explicit return types on functions and class methods
+    "@typescript-eslint/explicit-function-return-type": "off",
+    // Allow non-explicit return types on exported functions
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    // Disallow usage of the any type
+    "@typescript-eslint/no-explicit-any": 1,
+    // Disallows explicit type declarations for variables or parameters initialized to a number, string, or boolean
+    "@typescript-eslint/no-inferrable-types": [
+      "error",
+      {
+        "ignoreParameters": true
+      }
+    ],
+    // Error on declared but not used variable
+    "@typescript-eslint/no-unused-vars": "error"
+  }
+}

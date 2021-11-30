@@ -1,0 +1,8 @@
+# packages
+node_modules
+
+# tests
+coverage
+
+# output dir
+dist

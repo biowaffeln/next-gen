@@ -1,0 +1,40 @@
+{
+	"name": "next-gen-v1",
+	"version": "0.1.0",
+	"description": "no description",
+	"author": "biowaffeln",
+	"license": "MIT",
+	"repository": {
+		"type": "",
+		"url": ""
+	},
+	"bin": {
+		"your_command_name_here": "./dist/index.js"
+	},
+	"scripts": {
+		"start": "npm run build-ts && node dist/index.js",
+		"dev": "npm run build-ts && node --inspect-brk dist/index.js",
+		"type-check": "tsc --noEmit && eslint .",
+		"build": "npm run type-check && npm run build-ts",
+		"build-ts": "rm -Rf dist/ && swc src/ --config-file .swcrc_build -d dist/",
+		"test": "jest --watch",
+		"coverage": "jest --coverage"
+	},
+	"devDependencies": {
+		"@swc/cli": "^0.1.51",
+		"@swc/core": "^1.2.108",
+		"@swc/jest": "^0.2.5",
+		"@types/jest": "^27.0.2",
+		"@types/node": "^16.11.7",
+		"@typescript-eslint/eslint-plugin": "^5.3.1",
+		"@typescript-eslint/parser": "^5.3.1",
+		"eslint": "^8.2.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-jest": "^25.2.2",
+		"jest": "^27.3.1",
+		"jest-watch-typeahead": "^1.0.0",
+		"prettier": "^2.4.1",
+		"typescript": "^4.5.2"
+	},
+	"keywords": []
+}
