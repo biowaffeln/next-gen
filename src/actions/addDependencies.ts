@@ -26,11 +26,12 @@ export const addDependencies = async (
 	};
 };
 
-const set = (obj: Record<string, any>, paths: string[], value: any) => {
+const set = (obj: Record<string, unknown>, paths: string[], value: unknown) => {
 	let curr = obj;
 	for (const key of paths.slice(0, -1)) {
-		if (!curr[key]) curr[key] = {};
-		curr = curr[key];
+		if (!curr[key] || curr[key] !== 'object') curr[key] = {};
+		curr = curr[key] as Record<string, unknown>;
 	}
 	curr[paths.slice(-1)[0]] = value;
+	return obj;
 };
