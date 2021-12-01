@@ -16,7 +16,7 @@
 		"dev": "npm run build-ts && node --inspect-brk dist/index.js",
 		"type-check": "tsc --noEmit && eslint .",
 		"build": "npm run type-check && npm run build-ts",
-		"build-ts": "rm -Rf dist/ && swc src/ --config-file .swcrc_build -d dist/",
+		"build-ts": "rm -Rf dist/ && swc src/ --config-file .swcrc_build --copy-files -d dist/",
 		"test": "jest --watch",
 		"coverage": "jest --coverage"
 	},
