@@ -12,7 +12,6 @@
 		"noUnusedParameters": true,
 		"moduleResolution": "node",
 		"isolatedModules": true,
-		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
