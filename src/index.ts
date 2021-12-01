@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-export {};
+import { init } from './init';
+
+init('js', './test', 'Cool Project');
