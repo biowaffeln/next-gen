@@ -27,7 +27,7 @@ export const addDependencies = async (dependencies: Dependency[]) => {
 const set = (obj: Record<string, unknown>, paths: string[], value: unknown) => {
 	let curr = obj;
 	for (const key of paths.slice(0, -1)) {
-		if (!curr[key] || curr[key] !== 'object') curr[key] = {};
+		if (!curr[key] || typeof curr[key] !== 'object') curr[key] = {};
 		curr = curr[key] as Record<string, unknown>;
 	}
 	curr[paths.slice(-1)[0]] = value;
