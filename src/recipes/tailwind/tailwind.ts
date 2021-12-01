@@ -16,12 +16,14 @@ export const deps = [
 
 export const tailwind = async (): Promise<Change[]> => {
 	const addDeps = await addDependencies(deps);
-
-	const addConfig = createFile('tailwind.config.js', await get('tailwind.config.js')); // prettier-ignore
+	const addConfig = await Promise.all([
+		createFile('tailwind.config.js', await get('tailwind.config.js')),
+		createFile('postcss.config.js', await get('postcss.config.js')),
+	]);
 	const addStyles = createFile('styles/global.css', await get('global.css'));
 	const addStylesImport = await transformAST('pages/_app.js', (root) =>
 		addImport(root, j.template.statement`import "../styles/global.css";`)
 	);
 
-	return [addDeps, addConfig, addStyles, addStylesImport];
+	return [addDeps, ...addConfig, addStyles, addStylesImport];
 };
