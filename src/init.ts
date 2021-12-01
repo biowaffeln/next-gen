@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { writeChanges } from './actions/writeChanges';
-import { transformSimple } from './actions/transformSimple';
+import { transformFile } from './actions/transformFile';
 import * as path from 'path';
 import { removeAsync } from 'fs-jetpack';
 
@@ -23,12 +23,12 @@ export const init = async (
 		return;
 	}
 
-	const addProjectNameToREADME = await transformSimple(
+	const addProjectNameToREADME = await transformFile(
 		path.join(folder, 'README.md'),
 		(a) => a.replace('{{project-name}}', projectName)
 	);
 
-	const addProjectNameToPkg = await transformSimple(
+	const addProjectNameToPkg = await transformFile(
 		path.join(folder, 'package.json'),
 		(a) => a.replace('{{project-name}}', projectName)
 	);

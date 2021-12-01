@@ -3,15 +3,13 @@ import { readAsync } from 'fs-jetpack';
 export interface Dependency {
 	package: string;
 	version: string;
-	dev?: true;
+	dev?: boolean;
 }
 
-export const addDependencies = async (
-	path: string,
-	dependencies: Dependency[]
-) => {
+export const addDependencies = async (dependencies: Dependency[]) => {
+	const path = 'package.json';
 	const pkg = (await readAsync(path, 'json')) as
-		| Record<string, any>
+		| Record<string, unknown>
 		| undefined;
 	if (!pkg) throw new Error('package.json could not be found.');
 

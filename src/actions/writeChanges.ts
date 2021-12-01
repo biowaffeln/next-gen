@@ -1,8 +1,8 @@
 import { writeAsync } from 'fs-jetpack';
 
-interface Change {
+export interface Change {
 	path: string;
-	content: string | Record<string, any>;
+	content: string | Record<string, unknown>;
 }
 
 const writeChange = (result: Change) => writeAsync(result.path, result.content);

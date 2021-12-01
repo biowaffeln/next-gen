@@ -4,7 +4,7 @@ interface Options {
 	fallback?: string;
 }
 
-export const transformSimple = async (
+export const transformFile = async (
 	path: string,
 	transform: (content: string) => string,
 	{ fallback }: Options = {}
