@@ -3,6 +3,7 @@ import { promisify } from 'util';
 import { writeChanges } from './actions/writeChanges';
 import { transformSimple } from './actions/transformSimple';
 import * as path from 'path';
+import { removeAsync } from 'fs-jetpack';
 
 const execAsync = promisify(exec);
 const repository = 'git@github.com:biowaffeln/next-gen.git';
@@ -16,6 +17,7 @@ export const init = async (
 		await execAsync(
 			`git clone ${repository} -b template-${template} ${folder}`
 		);
+		await removeAsync(path.join(folder, '.git'));
 	} catch (e) {
 		console.log(e);
 		return;
