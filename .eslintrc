@@ -34,6 +34,6 @@
 			}
 		],
 		// Error on declared but not used variable
-		"@typescript-eslint/no-unused-vars": "error"
+		"@typescript-eslint/no-unused-vars": "warn"
 	}
 }
