@@ -4,6 +4,7 @@ import { writeChanges } from './actions/writeChanges';
 import { transformFile } from './actions/transformFile';
 import * as path from 'path';
 import { removeAsync } from 'fs-jetpack';
+import { toValidPath } from './utils/toValidPath';
 
 const execAsync = promisify(exec);
 const repository = 'git@github.com:biowaffeln/next-gen.git';
@@ -30,7 +31,7 @@ export const init = async (
 
 	const addProjectNameToPkg = await transformFile(
 		path.join(folder, 'package.json'),
-		(a) => a.replace('{{project-name}}', projectName)
+		(a) => a.replace('{{project-name}}', toValidPath(projectName))
 	);
 
 	await writeChanges(addProjectNameToREADME, addProjectNameToPkg);

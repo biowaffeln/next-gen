@@ -7,6 +7,7 @@ specifiers:
   '@types/jest': ^27.0.2
   '@types/jscodeshift': ^0.11.3
   '@types/node': ^16.11.7
+  '@types/prompts': ^2.0.14
   '@typescript-eslint/eslint-plugin': ^5.3.1
   '@typescript-eslint/parser': ^5.3.1
   eslint: ^8.2.0
@@ -17,11 +18,13 @@ specifiers:
   jest-watch-typeahead: ^1.0.0
   jscodeshift: ^0.13.0
   prettier: ^2.4.1
+  prompts: ^2.4.2
   typescript: ^4.5.2
 
 dependencies:
   fs-jetpack: 4.3.0
   jscodeshift: 0.13.0
+  prompts: 2.4.2
 
 devDependencies:
   '@swc/cli': 0.1.52_@swc+core@1.2.113
@@ -30,6 +33,7 @@ devDependencies:
   '@types/jest': 27.0.3
   '@types/jscodeshift': 0.11.3
   '@types/node': 16.11.10
+  '@types/prompts': 2.0.14
   '@typescript-eslint/eslint-plugin': 5.4.0_5c8ff4cecd5a55e744866c0654edac32
   '@typescript-eslint/parser': 5.4.0_eslint@8.3.0+typescript@4.5.2
   eslint: 8.3.0
@@ -1038,6 +1042,12 @@ packages:
 
   /@types/prettier/2.4.2:
     resolution: {integrity: sha512-ekoj4qOQYp7CvjX8ZDBgN86w3MqQhLE1hczEJbEIjgFEumDy+na/4AJAbLXfgEWFNB2pKadM5rPFtuSGMWK7xA==}
+    dev: true
+
+  /@types/prompts/2.0.14:
+    resolution: {integrity: sha512-HZBd99fKxRWpYCErtm2/yxUZv6/PBI9J7N4TNFffl5JbrYMHBwF25DjQGTW3b3jmXq+9P6/8fCIb2ee57BFfYA==}
+    dependencies:
+      '@types/node': 16.11.10
     dev: true
 
   /@types/stack-utils/2.0.1:
@@ -3258,7 +3268,6 @@ packages:
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
-    dev: true
 
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -3696,7 +3705,6 @@ packages:
     dependencies:
       kleur: 3.0.3
       sisteransi: 1.0.5
-    dev: true
 
   /psl/1.8.0:
     resolution: {integrity: sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ==}
@@ -3894,7 +3902,6 @@ packages:
 
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
-    dev: true
 
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
