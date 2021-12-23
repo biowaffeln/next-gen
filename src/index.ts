@@ -6,7 +6,7 @@ import process from 'process';
 import { writeChanges } from './actions/writeChanges';
 
 const main = async () => {
-	// await init('js', 'repo', 'Cool Project');
+	await init('ts', 'repo', 'Cool Project');
 	process.chdir('repo');
 	const changes = await tailwind();
 	writeChanges(...changes);

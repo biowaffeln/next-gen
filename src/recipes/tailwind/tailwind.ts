@@ -4,6 +4,7 @@ import { createFile } from '../../actions/createFile';
 import { transformAST } from '../../actions/transformAST';
 import { Change } from '../../actions/writeChanges';
 import { addImport } from '../../transforms/addImport';
+import { getAppPath } from '../../utils/getFilePath';
 import { getTemplate } from '../../utils/getTemplate';
 
 const get = getTemplate(__dirname);
@@ -21,8 +22,11 @@ export const tailwind = async (): Promise<Change[]> => {
 		createFile('postcss.config.js', await get('postcss.config.js')),
 	]);
 	const addStyles = createFile('styles/global.css', await get('global.css'));
-	const addStylesImport = await transformAST('pages/_app.js', (root) =>
-		addImport(root, j.template.statement`import "../styles/global.css";`)
+	const addStylesImport = await transformAST(
+		await getAppPath(),
+		(root) =>
+			addImport(root, j.template.statement`import "../styles/global.css";`),
+		{ fallback: '' }
 	);
 
 	return [addDeps, ...addConfig, addStyles, addStylesImport];
