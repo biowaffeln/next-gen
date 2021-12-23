@@ -1,10 +1,10 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { writeChanges } from './actions/writeChanges';
-import { transformFile } from './actions/transformFile';
 import * as path from 'path';
 import { removeAsync } from 'fs-jetpack';
 import { toValidPath } from './utils/toValidPath';
+import { updateFile } from './changes/file';
+import { writeChanges } from './changes/change';
 
 const execAsync = promisify(exec);
 const repository = 'git@github.com:biowaffeln/next-gen.git';
@@ -24,15 +24,15 @@ export const init = async (
 		return;
 	}
 
-	const addProjectNameToREADME = await transformFile(
+	const addProjectNameToREADME = updateFile(
 		path.join(folder, 'README.md'),
-		(a) => a.replace('{{project-name}}', projectName)
+		(content) => content.replace('{{project-name}}', projectName)
 	);
 
-	const addProjectNameToPkg = await transformFile(
+	const addProjectNameToPackageJson = updateFile(
 		path.join(folder, 'package.json'),
-		(a) => a.replace('{{project-name}}', toValidPath(projectName))
+		(content) => content.replace('{{project-name}}', toValidPath(projectName))
 	);
 
-	await writeChanges(addProjectNameToREADME, addProjectNameToPkg);
+	return writeChanges([addProjectNameToREADME, addProjectNameToPackageJson]);
 };

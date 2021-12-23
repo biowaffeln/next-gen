@@ -1,3 +1,3 @@
-import { existsAsync } from 'fs-jetpack';
+import { exists } from 'fs-jetpack';
 
-export const isTs = () => existsAsync('tsconfig.json');
+export const isTs = () => exists('tsconfig.json');

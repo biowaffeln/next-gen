@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import prompts from 'prompts';
-import { Change, writeChanges } from './actions/writeChanges';
+import { Change, writeChanges } from './changes/change';
 import { init } from './init';
 import { tailwind } from './recipes/tailwind/tailwind';
 import { toValidPath } from './utils/toValidPath';
@@ -52,14 +52,13 @@ const main = async () => {
 	process.chdir(directory);
 
 	const changes: Change[] = [];
-	console.log(styling);
 
 	if (styling === 'tailwind') {
-		const tailwindChanges = await tailwind();
+		const tailwindChanges = tailwind();
 		changes.push(...tailwindChanges);
 	}
 
-	writeChanges(...changes);
+	await writeChanges(changes);
 };
 
 main();
