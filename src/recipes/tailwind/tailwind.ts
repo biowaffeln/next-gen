@@ -10,7 +10,7 @@ import { getTemplate } from '../../utils/getTemplate';
 const get = getTemplate(__dirname);
 
 export const deps = [
-	{ package: 'tailwindcss', version: '^2.2.19', dev: true },
+	{ package: 'tailwindcss', version: '^3.0.0', dev: true },
 	{ package: 'postcss', version: '^8.4.4', dev: true },
 	{ package: 'autoprefixer', version: '^10.4.0', dev: true },
 ];
