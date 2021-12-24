@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should transform files correctly 1`] = `
+"{
+  \\"name\\": \\"test-app\\",
+  \\"version\\": \\"1.0.0\\",
+  \\"dependencies\\": {
+    \\"react\\": \\"latest\\",
+    \\"react-dom\\": \\"latest\\",
+    \\"next\\": \\"latest\\"
+  },
+  \\"devDependencies\\": {
+    \\"tailwindcss\\": \\"^3.0.0\\",
+    \\"postcss\\": \\"^8.4.4\\",
+    \\"autoprefixer\\": \\"^10.4.0\\"
+  }
+}"
+`;
+
+exports[`should transform files correctly 2`] = `
+"import \\"../styles/global.css\\";
+ 
+export default function App({ Component, pageProps }) {
+	return (
+		<Component {...pageProps} />
+	);
+}
+"
+`;
+
+exports[`should transform files correctly 3`] = `
+"@tailwind base;
+@tailwind components;
+@tailwind utilities;
+"
+`;

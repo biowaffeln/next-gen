@@ -9,7 +9,7 @@
 	],
 	"plugins": ["@typescript-eslint"],
 	"parserOptions": {
-		"project": "./tsconfig.json"
+		"project": "./tsconfig.eslint.json"
 	},
 	"rules": {
 		// Enforce the consistent use of either backticks, double, or single quotes

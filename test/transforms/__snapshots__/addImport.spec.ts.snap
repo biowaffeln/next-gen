@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should add imports to empty file 1`] = `
+"import { foo } from \\"bar\\";
+ "
+`;
+
+exports[`should add imports to file with content 1`] = `
+"import { foo } from \\"bar\\";
+ 
+export const test = 123;"
+`;
+
+exports[`should add imports to file with existing imports 1`] = `
+"import { render } from 'react-dom';
+
+import { foo } from \\"bar\\";
+
+render(<div />, document.getElementById('root'));"
+`;
